@@ -3,7 +3,7 @@
 # On Linux and Mac the dependencies (glm, glew, glfw) need to be installed manually
 
 cmake_minimum_required(VERSION 3.1)
-project(ppgso_projekt_fg CXX)
+project(DYNABlaster3D CXX)
 
 #
 # CONFIGURATION
@@ -102,7 +102,7 @@ target_include_directories(ppgso PUBLIC
 #
 # TARGETS
 #
-add_executable(projekt
+add_executable(DYNABlaster3D
         ../src/main.cpp)
-target_link_libraries(projekt ppgso shaders)
-install(TARGETS projekt DESTINATION .)
+target_link_libraries(DYNABlaster3D ppgso shaders)
+install(TARGETS DYNABlaster3D DESTINATION .)
