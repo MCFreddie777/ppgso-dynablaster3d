@@ -7,6 +7,11 @@
 #include <bin/ppgso/lib/ppgso.h>
 #include <GLUT/glut.h>
 
+#include "scene.h"
+#include "camera.h"
+#include "src/common/level.h"
+#include "src/objects/block.h"
+
 using namespace std;
 using namespace glm;
 using namespace ppgso;
@@ -16,7 +21,20 @@ const unsigned int SIZE = 1024;
 class SceneWindow : public Window {
 
 private:
+    Scene scene;
+    bool animate = true;
+    
     void initScene() {
+        
+        scene.objects.clear();
+        
+        /* Handling Camera */
+        auto camera = make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
+        scene.camera = move(camera);
+        
+        /* Generate level */
+        Level level(15);
+        level.create(scene);
     }
 
 public:
@@ -35,12 +53,47 @@ public:
     }
     
     void onKey(int key, int scanCode, int action, int mods) override {
+        scene.keyboard[key] = action;
+        
+        // Start & Reset
+        if (key == GLFW_KEY_ENTER || (key == GLFW_KEY_R && action == GLFW_PRESS)) {
+            initScene();
+        }
+        
+        // Pause
+        if (key == GLFW_KEY_P) {
+            animate = !animate;
+        }
+        
+        // Switch camera view
+        if (key == GLFW_KEY_C && action == GLFW_PRESS) {
+            scene.camera->switchView();
+        }
+        
+        // Handle camera
+        if (std::any_of(
+                begin(scene.camera->controls),
+                end(scene.camera->controls),
+                [&](int i) { return i == key; }
+        )) {
+            scene.camera->handleKey(key);
+        }
     }
     
     
     void onIdle() override {
+        static auto time = (float) glfwGetTime();
+        
+        // Compute time delta
+        float dt = animate ? (float) glfwGetTime() - time : 0;
+        
+        time = (float) glfwGetTime();
+        
         glClearColor(.5f, .5f, .5f, 0);
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
+        
+        scene.update(dt);
+        scene.render();
     }
 };
 
