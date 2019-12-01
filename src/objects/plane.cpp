@@ -5,35 +5,32 @@
 #include <shaders/diffuse_vert_glsl.h>
 #include <shaders/diffuse_frag_glsl.h>
 
-#include "block.h"
+#include "plane.h"
 
 using namespace std;
 using namespace glm;
 using namespace ppgso;
 
 // Static resources
-unique_ptr<Mesh> Block::mesh;
-unique_ptr<Texture> Block::texture;
-unique_ptr<Shader> Block::shader;
+unique_ptr<Mesh> Plane::mesh;
+unique_ptr<Texture> Plane::texture;
+unique_ptr<Shader> Plane::shader;
 
-Block::Block(vec3 position, string type) {
+Plane::Plane(vec3 position, uint size) {
     this->position = position;
-    
-    string texturePath = "../resources/textures/" + type + ".bmp";
+    this->scale = scale * vec3{size, 1, size};
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
-    
-    // TODO: fit texture to block
-    if (!texture) texture = make_unique<Texture>(image::loadBMP(texturePath));
+    if (!texture) texture = make_unique<Texture>(image::loadBMP("../resources/textures/grass.bmp"));
     if (!mesh) mesh = make_unique<Mesh>("../resources/objects/cube.obj");
 }
 
-bool Block::update(Scene &scene, float dt) {
+bool Plane::update(Scene &scene, float dt) {
     generateModelMatrix();
     return true;
 }
 
-void Block::render(Scene &scene) {
+void Plane::render(Scene &scene) {
     shader->use();
     
     // Set up light

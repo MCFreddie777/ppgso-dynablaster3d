@@ -5,35 +5,32 @@
 #include <shaders/diffuse_vert_glsl.h>
 #include <shaders/diffuse_frag_glsl.h>
 
-#include "block.h"
+#include "player.h"
 
 using namespace std;
 using namespace glm;
 using namespace ppgso;
 
 // Static resources
-unique_ptr<Mesh> Block::mesh;
-unique_ptr<Texture> Block::texture;
-unique_ptr<Shader> Block::shader;
+unique_ptr<Mesh> Player::mesh;
+unique_ptr<Texture> Player::texture;
+unique_ptr<Shader> Player::shader;
 
-Block::Block(vec3 position, string type) {
+Player::Player(vec3 position) {
     this->position = position;
     
-    string texturePath = "../resources/textures/" + type + ".bmp";
-    
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
-    
-    // TODO: fit texture to block
-    if (!texture) texture = make_unique<Texture>(image::loadBMP(texturePath));
+    // TODO: Right texture and mesh
+    if (!texture) texture = make_unique<Texture>(image::loadBMP("../resources/textures/block.bmp"));
     if (!mesh) mesh = make_unique<Mesh>("../resources/objects/cube.obj");
 }
 
-bool Block::update(Scene &scene, float dt) {
+bool Player::update(Scene &scene, float dt) {
     generateModelMatrix();
     return true;
 }
 
-void Block::render(Scene &scene) {
+void Player::render(Scene &scene) {
     shader->use();
     
     // Set up light

@@ -2,13 +2,13 @@
 // Created by František Gič on 30/11/2019.
 //
 
-#ifndef DYNABLASTER3D_BLOCK_H
-#define DYNABLASTER3D_BLOCK_H
+#ifndef DYNABLASTER3D_PLAYER_H
+#define DYNABLASTER3D_PLAYER_H
 
-#include "src/scene.h"
-#include "object.h"
+#include "scene.h"
+#include "objects/object.h"
 
-class Block final : public Object {
+class Player final : public Object {
 
 private:
     
@@ -18,14 +18,15 @@ private:
 
 public:
     
-    Block(vec3 position, std::string type);
+    Player(vec3 position);
     
     bool update(Scene &scene, float dt) override;
     
     void render(Scene &scene) override;
+    
 };
 
-#endif //DYNABLASTER3D_BLOCK_H
+#endif //DYNABLASTER3D_PLAYER_H
 
 
 
