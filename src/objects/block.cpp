@@ -12,22 +12,15 @@ using namespace glm;
 using namespace ppgso;
 
 // Static resources
-unique_ptr<Mesh> Block::mesh;
 unique_ptr<Shader> Block::shader;
-unique_ptr<Texture> Block::texture;
-//Texture *Block::texture;
-
 
 Block::Block (vec3 position, string type) {
     this->position = position;
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
+    if (!texture)
+        texture = make_unique<Texture>(image::loadBMP("../resources/textures/" + type + ".bmp"));
     if (!mesh) mesh = make_unique<Mesh>("../resources/objects/cube.obj");
-    
-    string texturePath = "../resources/textures/" + type + ".bmp";
-    // TODO: fit texture to block
-    if (!texture) texture = make_unique<Texture>(image::loadBMP(texturePath));
-    //    if (!texture) texture = new Texture(image::loadBMP(texturePath));
 }
 
 bool Block::update (Scene &scene, float dt) {

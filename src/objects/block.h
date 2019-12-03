@@ -12,13 +12,11 @@ class Block final : public Object {
 
 private:
     
-    static std::unique_ptr<ppgso::Mesh> mesh;
+    std::unique_ptr<ppgso::Mesh> mesh;
     static std::unique_ptr<ppgso::Shader> shader;
-    static std::unique_ptr<ppgso::Texture> texture;
+    std::unique_ptr<ppgso::Texture> texture;
 
 public:
-//    static ppgso::Texture *texture;
-    
     Block(vec3 position, std::string type);
     
     bool update(Scene &scene, float dt) override;
