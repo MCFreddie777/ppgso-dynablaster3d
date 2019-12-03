@@ -70,6 +70,35 @@ void Level::generate () {
             }
         }
     }
+    
+    
+    
+    // Remove blocks near player in radius == 1
+    int radius = 1;
+    for (uint i = 0; i < this->size; i++) {
+        for (uint j = 0; j < this->size; j++) {
+            if (level[i][j] == 'P') {
+                std::cout << "Players position: [ " << i << ',' << j << "]\n";
+                
+                for (int k = ((int) i - radius); k <= ((int) i + radius); k++) {
+                    for (int l = ((int) j - radius); l <= ((int) j + radius); l++) {
+                        // Check if its a destroyable block in a range of map
+                        if (
+                            k > 0 &&
+                            j > 0 &&
+                            ((uint) k) < this->size &&
+                            ((uint) j) < this->size &&
+                            level[(uint) k][(uint) l] == 'B'
+                            ) { ;
+                            level[(uint) k][(uint) l] = '-';
+                        }
+                    }
+                }
+            }
+            else continue;
+        }
+    }
+    
 }
 
 void Level::create (Scene &scene) {
