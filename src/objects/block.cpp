@@ -13,27 +13,29 @@ using namespace ppgso;
 
 // Static resources
 unique_ptr<Mesh> Block::mesh;
-unique_ptr<Texture> Block::texture;
 unique_ptr<Shader> Block::shader;
+unique_ptr<Texture> Block::texture;
+//Texture *Block::texture;
 
-Block::Block(vec3 position, string type) {
+
+Block::Block (vec3 position, string type) {
     this->position = position;
     
-    string texturePath = "../resources/textures/" + type + ".bmp";
-    
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
+    if (!mesh) mesh = make_unique<Mesh>("../resources/objects/cube.obj");
     
+    string texturePath = "../resources/textures/" + type + ".bmp";
     // TODO: fit texture to block
     if (!texture) texture = make_unique<Texture>(image::loadBMP(texturePath));
-    if (!mesh) mesh = make_unique<Mesh>("../resources/objects/cube.obj");
+    //    if (!texture) texture = new Texture(image::loadBMP(texturePath));
 }
 
-bool Block::update(Scene &scene, float dt) {
+bool Block::update (Scene &scene, float dt) {
     generateModelMatrix();
     return true;
 }
 
-void Block::render(Scene &scene) {
+void Block::render (Scene &scene) {
     shader->use();
     
     // Set up light

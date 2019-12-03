@@ -5,7 +5,7 @@
 #ifndef DYNABLASTER3D_PLANE_H
 #define DYNABLASTER3D_PLANE_H
 
-#include "src/scene.h"
+#include "src/common/scene.h"
 #include "object.h"
 
 class Plane final : public Object {
@@ -18,7 +18,7 @@ private:
 
 public:
     
-    Plane(vec3 position, uint size);
+    Plane(uint size);
     
     bool update(Scene &scene, float dt) override;
     

@@ -5,7 +5,7 @@
 #ifndef DYNABLASTER3D_BLOCK_H
 #define DYNABLASTER3D_BLOCK_H
 
-#include "src/scene.h"
+#include "src/common/scene.h"
 #include "object.h"
 
 class Block final : public Object {
@@ -17,6 +17,7 @@ private:
     static std::unique_ptr<ppgso::Texture> texture;
 
 public:
+//    static ppgso::Texture *texture;
     
     Block(vec3 position, std::string type);
     
