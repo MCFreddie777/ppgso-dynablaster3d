@@ -14,13 +14,14 @@ using namespace ppgso;
 // Static resources
 unique_ptr<Shader> Block::shader;
 
-Block::Block (vec3 position, string type) {
+Block::Block (vec3 position, const string texturePath, const string meshPath) {
     this->position = position;
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
     if (!texture)
-        texture = make_unique<Texture>(image::loadBMP("../resources/textures/" + type + ".bmp"));
-    if (!mesh) mesh = make_unique<Mesh>("../resources/objects/cube.obj");
+        texture = make_unique<Texture>(image::loadBMP("../resources/textures/" + texturePath + ""
+                                                                                               ".bmp"));
+    if (!mesh) mesh = make_unique<Mesh>("../resources/objects/" + meshPath + ".obj");
 }
 
 bool Block::update (Scene &scene, float dt) {
