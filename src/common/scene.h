@@ -10,7 +10,7 @@
 #include <list>
 
 #include "src/objects/object.h"
-#include "camera.h"
+#include "src/common/camera.h"
 
 class Scene {
 public:

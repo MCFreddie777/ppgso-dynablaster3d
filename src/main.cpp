@@ -7,10 +7,10 @@
 #include <bin/ppgso/lib/ppgso.h>
 #include <GLUT/glut.h>
 
-#include "scene.h"
-#include "camera.h"
+#include "src/common/scene.h"
+#include "src/common/camera.h"
 #include "src/common/level.h"
-#include "src/objects/block.h"
+#include "src/objects/player.h"
 
 using namespace std;
 using namespace glm;
@@ -54,20 +54,22 @@ public:
     
     void onKey(int key, int scanCode, int action, int mods) override {
         scene.keyboard[key] = action;
+    
+        if (action == GLFW_PRESS) {
+            // Start & Reset
+            if (key == GLFW_KEY_ENTER || key == GLFW_KEY_R) {
+                initScene();
+            }
         
-        // Start & Reset
-        if (key == GLFW_KEY_ENTER || (key == GLFW_KEY_R && action == GLFW_PRESS)) {
-            initScene();
-        }
+            // Pause
+            if (key == GLFW_KEY_P) {
+                animate = !animate;
+            }
         
-        // Pause
-        if (key == GLFW_KEY_P) {
-            animate = !animate;
-        }
-        
-        // Switch camera view
-        if (key == GLFW_KEY_C && action == GLFW_PRESS) {
-            scene.camera->switchView();
+            // Switch camera view
+            if (key == GLFW_KEY_C) {
+                scene.camera->switchView();
+            }
         }
         
         // Handle camera

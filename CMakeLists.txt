@@ -104,13 +104,15 @@ target_include_directories(ppgso PUBLIC
 #
 add_executable(DYNABlaster3D
         ../src/main.cpp
-        ../src/scene.cpp
-        ../src/camera.cpp
-        ../src/player.cpp
+        ../src/common/movement.cpp
+        ../src/common/scene.cpp
+        ../src/common/camera.cpp
         ../src/common/level.cpp
         ../src/objects/object.cpp
         ../src/objects/block.cpp
         ../src/objects/plane.cpp
+        ../src/objects/player.cpp
+        ../src/objects/enemy.cpp
         )
 target_link_libraries(DYNABlaster3D ppgso shaders)
 install(TARGETS DYNABlaster3D DESTINATION .)
