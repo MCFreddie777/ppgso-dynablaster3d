@@ -5,30 +5,31 @@
 #include <cstdlib>
 #include <cmath>
 #include "level.h"
-#include "src/player.h"
 #include "src/objects/block.h"
 #include "src/objects/plane.h"
+#include "src/objects/player.h"
+#include "src/objects/enemy.h"
 
 using namespace std;
 
-Level::Level(uint size) {
+Level::Level (uint size) {
     this->size = size;
     this->objects = {
-            .blocks =  {
-                    .maxNumber = 0,
-                    .number = 0,
-                    .spawnRate = 0.37
-            },
-            .enemies =  {
-                    .maxNumber = (int) round(size / 3),
-                    .number = 0,
-                    .spawnRate = 0.13
-            },
-            .player =  {
-                    .maxNumber = 1,
-                    .number = 0,
-                    .spawnRate = 0.05
-            },
+        .blocks =  {
+            .maxNumber = 0,
+            .number = 0,
+            .spawnRate = 0.37
+        },
+        .enemies =  {
+            .maxNumber = (int) round(size / 3),
+            .number = 0,
+            .spawnRate = 0.13
+        },
+        .player =  {
+            .maxNumber = 1,
+            .number = 0,
+            .spawnRate = 0.05
+        },
     };
     
     this->generate();
@@ -37,7 +38,7 @@ Level::Level(uint size) {
 /**
  * Generates level matrix
  */
-void Level::generate() {
+void Level::generate () {
     level = vector<vector<char>>(size, vector<char>(size));
     
     srand(time(NULL));
@@ -65,20 +66,18 @@ void Level::generate() {
                 level[i][j] = 'E';
                 objects.enemies.number++;
             }
-            else if (random < objects.blocks.spawnRate) {
-                level[i][j] = 'B';
-            }
-            else {
-                level[i][j] = '-';
+            else if ((random < objects.blocks.spawnRate)) {
+                if (level[i][j - 1] != 'P' || level[i - 1][j] != 'P' || level[i - 1][j + 1] != 'P')
+                    level[i][j] = 'B';
             }
         }
     }
 }
 
-void Level::create(Scene &scene) {
+void Level::create (Scene &scene) {
     
     // Generate ground
-    auto plane = make_unique<Plane>(vec3{0, 0, 0}, size);
+    auto plane = make_unique<Plane>(size);
     scene.objects.push_back(move(plane));
     
     // Generate other objects
@@ -97,7 +96,10 @@ void Level::create(Scene &scene) {
                 auto player = make_unique<Player>(position);
                 scene.objects.push_back(move(player));
             }
+            else if (level[i][j] == 'E') {
+                auto player = make_unique<Enemy>(position);
+                scene.objects.push_back(move(player));
+            }
         }
     }
-    
 }

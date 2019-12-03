@@ -7,7 +7,7 @@
 
 #include <vector>
 
-#include "src/scene.h"
+#include "scene.h"
 
 using namespace std;
 
