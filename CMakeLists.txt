@@ -110,7 +110,6 @@ add_executable(DYNABlaster3D
         ../src/common/level.cpp
         ../src/objects/object.cpp
         ../src/objects/block.cpp
-        ../src/objects/plane.cpp
         ../src/objects/player.cpp
         ../src/objects/enemy.cpp
         )

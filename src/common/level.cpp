@@ -6,7 +6,6 @@
 #include <cmath>
 #include "level.h"
 #include "src/objects/block.h"
-#include "src/objects/plane.h"
 #include "src/objects/player.h"
 #include "src/objects/enemy.h"
 
@@ -67,8 +66,7 @@ void Level::generate () {
                 objects.enemies.number++;
             }
             else if ((random < objects.blocks.spawnRate)) {
-                if (level[i][j - 1] != 'P' || level[i - 1][j] != 'P' || level[i - 1][j + 1] != 'P')
-                    level[i][j] = 'B';
+                level[i][j] = 'B';
             }
         }
     }
@@ -77,7 +75,8 @@ void Level::generate () {
 void Level::create (Scene &scene) {
     
     // Generate ground
-    auto plane = make_unique<Plane>(size);
+    auto plane = make_unique<Block>(vec3{size - 1, 0.8, size - 1}, "grass");
+    plane->scale = plane->scale * vec3{size, 0.2, size};
     scene.objects.push_back(move(plane));
     
     // Generate other objects
