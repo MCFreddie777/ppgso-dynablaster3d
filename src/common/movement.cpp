@@ -10,58 +10,90 @@
 
 
 template<typename T>
-Move Movement::getPossibleMove (Scene &scene, T *object) {
-    Move movement = {
-        true,
-        true,
-        true,
-        true,
+ComplexPosition Movement::getPossibleMove (Scene &scene, T *object) {
+    
+    ComplexPosition position{
+        {
+            true,
+            true,
+            true,
+            true,
+            
+        },
+        false,
         false,
         false
     };
+    
     for (auto &obj : scene.objects) {
         
         // Ignore self in scene
         if (obj.get() == object)
             continue;
         
+        if (dynamic_cast<Enemy *>(obj.get())) {
+            if (
+                distance(object->position.z, obj->position.z) == 0 &&
+                distance(object->position.x, obj->position.x) == 0
+                ) {
+                if (dynamic_cast<Player *>(object)) {
+                    position.intersects = true;
+                }
+            }
+        }
+        
         auto block = dynamic_cast<Block *>(obj.get());
         if (!block) continue;
         
+        
         if (distance(object->position.z, block->position.z) == 2
             && block->position.x == object->position.x) {
+
+
+//            if (dynamic_cast<Enemy *>(object)) {
+//                std::cout << "Object.GetType(): " << typeid(object).name() << '\n';
+//                position.intersects = object;
+//            }
             
             if (block->position.z - object->position.z == 2) {
-                movement.up = false;
+                position.move.up = false;
             }
-            else movement.down = false;
+            else position.move.down = false;
         }
         
         if (distance(object->position.x, block->position.x) == 2
             && block->position.z == object->position.z) {
             
             if (block->position.x - object->position.x == 2) {
-                movement.left = false;
+                position.move.left = false;
             }
-            else movement.right = false;
+            else position.move.right = false;
         }
     }
     
     
-    if ((movement.up + movement.down + movement.left + movement.right) > 2)
-        movement.inCrossRoads = true;
+    if ((position.move.up + position.move.down + position.move.left + position.move.right) > 2)
+        position.inCrossRoads = true;
     
-    if (((movement.up + movement.down + movement.left + movement.right) == 2) &&
+    if (
+        ((position.move.up + position.move.down + position.move.left + position.move.right) == 2) &&
         (
-            ((movement.up || movement.down) && (movement.up != movement.down)) ||
-            ((movement.left || movement.right) && (movement.left != movement.right))
+            (
+                (position.move.up || position.move.down) &&
+                (position.move.up != position.move.down)
+            ) ||
+            (
+                (position.move.left || position.move.right) &&
+                (position.move.left != position.move.right)
+            )
         )
         )
-        movement.inCorner = true;
+        position.inCorner = true;
     
-    return movement;
+    return position;
 }
 
-template Move Movement::getPossibleMove<Player> (Scene &scene, Player *player);
+template ComplexPosition Movement::getPossibleMove<Player> (Scene &scene, Player *player);
 
-template Move Movement::getPossibleMove<Enemy> (Scene &scene, Enemy *enemy);
+template ComplexPosition Movement::getPossibleMove<Enemy> (Scene &scene, Enemy *enemy);
+

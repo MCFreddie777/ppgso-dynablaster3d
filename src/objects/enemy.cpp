@@ -25,40 +25,41 @@ Enemy::Enemy (vec3 position) {
 }
 
 bool Enemy::update (Scene &scene, float dt) {
-    Move movement = Movement::getPossibleMove(scene, this);
-    roam(movement, dt);
+    ComplexPosition complexPosition = Movement::getPossibleMove(scene, this);
+    if (scene.animate) roam(complexPosition, dt);
     generateModelMatrix();
     return true;
 }
 
-void Enemy::roam (Move movement, float dt) {
+void Enemy::roam (ComplexPosition complexPosition, float dt) {
     delay += dt;
     
     if (delay > 0.3f) {
         delay = 0;
         
         // generate new direction when on crossroads or corners
-        if (movement.inCorner || movement.inCrossRoads)
+        if (complexPosition.inCorner || complexPosition.inCrossRoads)
             direction = 0;
         
         // generate new direction
         if (!direction) {
             // if there are more ways to go
-            if (movement.up + movement.down + movement.left + movement.right > 1) {
+            if (complexPosition.move.up + complexPosition.move.down + complexPosition.move.left +
+                complexPosition.move.right > 1) {
                 direction = rand() % 4 + 1;
             }
                 // else go the only way possible
             else {
-                if (movement.up) direction = 1;
-                if (movement.down) direction = 2;
-                if (movement.left) direction = 3;
-                if (movement.right) direction = 4;
+                if (complexPosition.move.up) direction = 1;
+                if (complexPosition.move.down) direction = 2;
+                if (complexPosition.move.left) direction = 3;
+                if (complexPosition.move.right) direction = 4;
             }
         }
         
         switch (direction) {
             case 1: {
-                if (movement.up) {
+                if (complexPosition.move.up) {
                     position.z += 2;
                     rotation.z = 0;
                 }
@@ -68,7 +69,7 @@ void Enemy::roam (Move movement, float dt) {
                 break;
             }
             case 2: {
-                if (movement.down) {
+                if (complexPosition.move.down) {
                     position.z -= 2;
                     rotation.z = -PI;
                 }
@@ -78,7 +79,7 @@ void Enemy::roam (Move movement, float dt) {
                 break;
             }
             case 3: {
-                if (movement.left) {
+                if (complexPosition.move.left) {
                     position.x += 2;
                     rotation.z = PI / 2.0f;
                 }
@@ -88,7 +89,7 @@ void Enemy::roam (Move movement, float dt) {
                 break;
             }
             case 4: {
-                if (movement.right) {
+                if (complexPosition.move.right) {
                     position.x -= 2;
                     rotation.z = -PI / 2.0f;
                 }

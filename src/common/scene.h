@@ -14,11 +14,13 @@
 
 class Scene {
 public:
-    void update(float time);
+    bool animate = true;
     
-    void render();
+    void update (float time);
     
-    std::vector<Object *> intersect(const glm::vec3 &position, const glm::vec3 &direction);
+    void render ();
+    
+    std::vector<Object *> intersect (const glm::vec3 &position, const glm::vec3 &direction);
     
     
     // Camera object

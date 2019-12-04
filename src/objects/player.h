@@ -19,15 +19,15 @@ private:
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
     
-    void handleMovement(map<int, int> keyboard, float dt, Move movement);
+    void handleMovement (map<int, int> keyboard, float dt, ComplexPosition complexPosition);
 
 public:
     
-    Player(vec3 position);
+    Player (vec3 position);
     
-    bool update(Scene &scene, float dt) override;
+    bool update (Scene &scene, float dt) override;
     
-    void render(Scene &scene) override;
+    void render (Scene &scene) override;
 };
 
 #endif //DYNABLASTER3D_PLAYER_H

@@ -22,11 +22,11 @@ class SceneWindow : public Window {
 
 private:
     Scene scene;
-    bool animate = true;
     
     void initScene() {
         
         scene.objects.clear();
+        scene.animate = true;
         
         /* Handling Camera */
         auto camera = make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
@@ -63,7 +63,7 @@ public:
         
             // Pause
             if (key == GLFW_KEY_P) {
-                animate = !animate;
+                scene.animate = !scene.animate;
             }
         
             // Switch camera view
@@ -87,7 +87,7 @@ public:
         static auto time = (float) glfwGetTime();
         
         // Compute time delta
-        float dt = animate ? (float) glfwGetTime() - time : 0;
+        float dt = scene.animate ? (float) glfwGetTime() - time : 0;
         
         time = (float) glfwGetTime();
         

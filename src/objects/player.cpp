@@ -7,6 +7,7 @@
 
 #include "player.h"
 #include "block.h"
+#include "enemy.h"
 
 using namespace std;
 using namespace glm;
@@ -17,7 +18,7 @@ unique_ptr<Mesh> Player::mesh;
 unique_ptr<Texture> Player::texture;
 unique_ptr<Shader> Player::shader;
 
-Player::Player(vec3 position) {
+Player::Player (vec3 position) {
     this->position = position;
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
@@ -26,14 +27,20 @@ Player::Player(vec3 position) {
     if (!mesh) mesh = make_unique<Mesh>("../resources/objects/player.obj");
 }
 
-bool Player::update(Scene &scene, float dt) {
-    Move movement = Movement::getPossibleMove(scene,this);
-    handleMovement(scene.keyboard, dt, movement);
+bool Player::update (Scene &scene, float dt) {
+    ComplexPosition complexPosition = Movement::getPossibleMove(scene, this);
+    
+    if (complexPosition.intersects) {
+        scene.animate = false;
+        return false; // die
+    }
+    
+    handleMovement(scene.keyboard, dt, complexPosition);
     generateModelMatrix();
     return true;
 }
 
-void Player::render(Scene &scene) {
+void Player::render (Scene &scene) {
     shader->use();
     
     // Set up light
@@ -51,27 +58,27 @@ void Player::render(Scene &scene) {
     mesh->render();
 }
 
-void Player::handleMovement(map<int, int> keyboard, float dt, Move movement) {
+void Player::handleMovement (map<int, int> keyboard, float dt, ComplexPosition complexPosition) {
     
     delay += dt;
     
     if (delay > 0.25f) {
         delay = 0;
-        
-        if (keyboard[GLFW_KEY_W] && movement.up) {
+    
+        if (keyboard[GLFW_KEY_W] && complexPosition.move.up) {
             position.z += 2;
             rotation.z = 0;
             
         }
-        if (keyboard[GLFW_KEY_S] && movement.down) {
+        if (keyboard[GLFW_KEY_S] && complexPosition.move.down) {
             position.z -= 2;
             rotation.z = -PI;
         }
-        if (keyboard[GLFW_KEY_A] && movement.left) {
+        if (keyboard[GLFW_KEY_A] && complexPosition.move.left) {
             position.x += 2;
             rotation.z = PI / 2.0f;
         }
-        if (keyboard[GLFW_KEY_D] && movement.right) {
+        if (keyboard[GLFW_KEY_D] && complexPosition.move.right) {
             position.x -= 2;
             rotation.z = -PI / 2.0f;
             
