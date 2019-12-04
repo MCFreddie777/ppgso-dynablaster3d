@@ -19,7 +19,7 @@ private:
     static std::unique_ptr<ppgso::Mesh> mesh;
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
-private:
+    
     void roam (ComplexPosition complexPosition, float dt);
 
 public:

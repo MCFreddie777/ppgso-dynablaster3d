@@ -8,6 +8,7 @@
 #include "player.h"
 #include "block.h"
 #include "enemy.h"
+#include "bomb.h"
 
 using namespace std;
 using namespace glm;
@@ -35,7 +36,7 @@ bool Player::update (Scene &scene, float dt) {
         return false; // die
     }
     
-    handleMovement(scene.keyboard, dt, complexPosition);
+    handleMovement(scene.keyboard, dt, complexPosition, scene);
     generateModelMatrix();
     return true;
 }
@@ -58,7 +59,10 @@ void Player::render (Scene &scene) {
     mesh->render();
 }
 
-void Player::handleMovement (map<int, int> keyboard, float dt, ComplexPosition complexPosition) {
+void Player::handleMovement (
+    map<int, int> keyboard, float dt, ComplexPosition complexPosition,
+    Scene &scene
+) {
     
     delay += dt;
     
@@ -86,7 +90,8 @@ void Player::handleMovement (map<int, int> keyboard, float dt, ComplexPosition c
         
         // TODO:
         if (keyboard[GLFW_KEY_SPACE]) {
-            std::cout << "The bomb has been planted. Terrorists win!";
+            auto player = make_unique<Bomb>(position);
+            scene.objects.push_back(move(player));
         }
     }
 }

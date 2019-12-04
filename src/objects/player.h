@@ -19,7 +19,10 @@ private:
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
     
-    void handleMovement (map<int, int> keyboard, float dt, ComplexPosition complexPosition);
+    void handleMovement (
+        map<int, int> keyboard, float dt, ComplexPosition complexPosition, Scene
+    &scene
+    );
 
 public:
     
