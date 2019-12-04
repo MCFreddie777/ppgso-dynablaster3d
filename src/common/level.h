@@ -31,13 +31,16 @@ private:
     vector<vector<char>> level;
     LevelObjects objects;
     
-    void generate();
+    void generate ();
+    
+    bool canSpawn (vec2 position, int radius);
+
 
 public:
     
-    explicit Level(uint size);
+    explicit Level (uint size);
     
-    void create(Scene &scene);
+    void create (Scene &scene);
     
 };
 

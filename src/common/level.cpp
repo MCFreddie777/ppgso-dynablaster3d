@@ -15,19 +15,16 @@ Level::Level (uint size) {
     this->size = size;
     this->objects = {
         .blocks =  {
-            .maxNumber = 0,
+            .maxNumber = (int) ((size * size) * 0.17),
             .number = 0,
-            .spawnRate = 0.37
         },
         .enemies =  {
             .maxNumber = (int) round(size / 3),
             .number = 0,
-            .spawnRate = 0.13
         },
         .player =  {
             .maxNumber = 1,
             .number = 0,
-            .spawnRate = 0.05
         },
     };
     
@@ -49,9 +46,9 @@ void Level::generate () {
             if ((i == 0 || j == 0 || i == size - 1 || j == size - 1)
                 || (i % 2 == 0 && j % 2 == 0)) {
                 level[i][j] = 'W';
-                continue;
             }
-            
+    
+            /* Doesn't seem much random
             double random = rand() / (RAND_MAX + 1.);
             
             if ((random < objects.player.spawnRate)
@@ -68,37 +65,49 @@ void Level::generate () {
             else if ((random < objects.blocks.spawnRate)) {
                 level[i][j] = 'B';
             }
+             */
         }
     }
     
     
+    vec2 position;
     
-    // Remove blocks near player in radius == 1
+    // Generate player
+    while (!objects.player.number) {
+        position.x = rand() % size;
+        position.y = rand() % size;
+        
+        if (!level[(uint) position.x][(uint) position.y]) {
+            level[(uint) position.x][(uint) position.y] = 'P';
+            objects.player.number++;
+        }
+    }
+    
     int radius = 1;
-    for (uint i = 0; i < this->size; i++) {
-        for (uint j = 0; j < this->size; j++) {
-            if (level[i][j] == 'P') {
-                std::cout << "Players position: [ " << i << ',' << j << "]\n";
-                
-                for (int k = ((int) i - radius); k <= ((int) i + radius); k++) {
-                    for (int l = ((int) j - radius); l <= ((int) j + radius); l++) {
-                        // Check if its a destroyable block in a range of map
-                        if (
-                            k > 0 &&
-                            j > 0 &&
-                            ((uint) k) < this->size &&
-                            ((uint) j) < this->size &&
-                            level[(uint) k][(uint) l] == 'B'
-                            ) { ;
-                            level[(uint) k][(uint) l] = '-';
-                        }
-                    }
-                }
-            }
-            else continue;
+    
+    // Generate enemies
+    while (objects.enemies.number < objects.enemies.maxNumber) {
+        
+        position.x = rand() % (size - 2) + 1;
+        position.y = rand() % (size - 2) + 1;
+        
+        if (canSpawn(position, radius)) {
+            level[(uint) position.x][(uint) position.y] = 'E';
+            objects.enemies.number++;
         }
     }
     
+    // Generate destroyable blocks
+    while (objects.blocks.number < objects.blocks.maxNumber) {
+        
+        position.x = rand() % (size - 2) + 1;
+        position.y = rand() % (size - 2) + 1;
+        
+        if (canSpawn(position, radius)) {
+            level[(uint) position.x][(uint) position.y] = 'B';
+            objects.blocks.number++;
+        }
+    }
 }
 
 void Level::create (Scene &scene) {
@@ -130,4 +139,46 @@ void Level::create (Scene &scene) {
             }
         }
     }
+}
+
+bool Level::canSpawn (vec2 position, int radius) {
+    
+    bool suitablePos = true;
+    
+    // object existing on this position
+    if (level[(uint) position.x][(uint) position.y])
+        return false;
+    
+    for (
+        int i = ((int) position.x - radius);
+        i <= ((int) position.x + radius) && suitablePos;
+        i++
+        ) {
+        
+        for (
+            int j = ((int) position.y - radius);
+            j <= ((int) position.y + radius) && suitablePos;
+            j++
+            ) {
+            
+            
+            // Check boundaries
+            if (
+                i > 0 &&
+                j > 0 &&
+                ((uint) i) < this->size &&
+                ((uint) j) < this->size
+                ) {
+                
+                // if player or enemy is in radius
+                if (
+                    level[(uint) i][(uint) j] == 'P' ||
+                    level[(uint) i][(uint) j] == 'E'
+                    ) {
+                    suitablePos = false;
+                }
+            }
+        }
+    }
+    return suitablePos;
 }
