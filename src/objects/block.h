@@ -2,6 +2,8 @@
 // Created by František Gič on 30/11/2019.
 //
 
+#pragma once
+
 #ifndef DYNABLASTER3D_BLOCK_H
 #define DYNABLASTER3D_BLOCK_H
 
@@ -16,6 +18,8 @@ private:
     std::unique_ptr<ppgso::Texture> texture;
 
 public:
+    string type;
+    
     Block (vec3 position, string texturePath, string meshPath = "cube");
     
     bool update (Scene &scene, float dt) override;

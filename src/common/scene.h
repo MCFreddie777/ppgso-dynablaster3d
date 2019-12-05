@@ -2,6 +2,8 @@
 // Created by František Gič on 30/11/2019.
 //
 
+#pragma once
+
 #ifndef DYNABLASTER3D_SCENE_H
 #define DYNABLASTER3D_SCENE_H
 
@@ -11,6 +13,7 @@
 
 #include "src/objects/object.h"
 #include "src/common/camera.h"
+#include "src/common/level.h"
 
 class Scene {
 public:
@@ -22,6 +25,7 @@ public:
     
     std::vector<Object *> intersect (const glm::vec3 &position, const glm::vec3 &direction);
     
+    std::unique_ptr<Level> level;
     
     // Camera object
     std::unique_ptr<Camera> camera;

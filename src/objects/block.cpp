@@ -16,6 +16,7 @@ unique_ptr<Shader> Block::shader;
 
 Block::Block (vec3 position, const string texturePath, const string meshPath) {
     this->position = position;
+    this->type = texturePath; // wall | block
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
     if (!texture)

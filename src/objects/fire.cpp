@@ -29,6 +29,7 @@ Fire::Fire (vec3 position, float rotation) {
 }
 
 bool Fire::update (Scene &scene, float dt) {
+    Movement::getPossibleMove(scene, this);
     
     age += dt;
     if (age > maxAge) {

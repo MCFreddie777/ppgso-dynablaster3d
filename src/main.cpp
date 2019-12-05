@@ -23,8 +23,7 @@ class SceneWindow : public Window {
 private:
     Scene scene;
     
-    void initScene() {
-        
+    static void initScene (Scene &scene) {
         scene.objects.clear();
         scene.animate = true;
         
@@ -32,13 +31,13 @@ private:
         auto camera = make_unique<Camera>(60.0f, 1.0f, 0.1f, 100.0f);
         scene.camera = move(camera);
         
-        /* Generate level */
-        Level level(15);
-        level.create(scene);
+        auto level = make_unique<Level>(15);
+        scene.level = move(level);
+        scene.level->create(scene);
     }
 
 public:
-    SceneWindow() : Window{"DYNABlaster3D", SIZE, SIZE} {
+    SceneWindow () : Window{"DYNABlaster3D", SIZE, SIZE} {
         hideCursor();
         glfwSetInputMode(window, GLFW_STICKY_KEYS, 1);
         
@@ -49,23 +48,23 @@ public:
         glFrontFace(GL_CCW);
         glCullFace(GL_BACK);
         
-        initScene();
+        initScene(scene);
     }
     
-    void onKey(int key, int scanCode, int action, int mods) override {
+    void onKey (int key, int scanCode, int action, int mods) override {
         scene.keyboard[key] = action;
-    
+        
         if (action == GLFW_PRESS) {
             // Start & Reset
             if (key == GLFW_KEY_ENTER || key == GLFW_KEY_R) {
-                initScene();
+                initScene(scene);
             }
-        
+            
             // Pause
             if (key == GLFW_KEY_P) {
                 scene.animate = !scene.animate;
             }
-        
+            
             // Switch camera view
             if (key == GLFW_KEY_C) {
                 scene.camera->switchView();
@@ -74,16 +73,16 @@ public:
         
         // Handle camera
         if (std::any_of(
-                begin(scene.camera->controls),
-                end(scene.camera->controls),
-                [&](int i) { return i == key; }
+            begin(scene.camera->controls),
+            end(scene.camera->controls),
+            [&] (int i) { return i == key; }
         )) {
             scene.camera->handleKey(key);
         }
     }
     
     
-    void onIdle() override {
+    void onIdle () override {
         static auto time = (float) glfwGetTime();
         
         // Compute time delta
@@ -99,7 +98,7 @@ public:
     }
 };
 
-int main() {
+int main () {
     SceneWindow window;
     
     while (window.pollEvents()) {}

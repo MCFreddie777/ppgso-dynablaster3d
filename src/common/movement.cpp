@@ -28,23 +28,29 @@ ComplexPosition Movement::getPossibleMove (Scene &scene, T *object) {
         false
     };
     
-    for (auto &obj : scene.objects) {
+    auto i = std::begin(scene.objects);
+    while (i != std::end(scene.objects)) {
+        bool iterate = true;
+        
+        unique_ptr<Object> &obj = *i;
         
         // Ignore self in scene
-        if (obj.get() == object)
+        if (obj.get() == object) {
+            i++;
             continue;
-    
+        }
+        
         // Check for intersections
         if (
             distance(object->position.z, obj->position.z) == 0 &&
             distance(object->position.x, obj->position.x) == 0
             ) {
-        
+    
             // Player dies when intersects with enemy
             if (dynamic_cast<Player *>(object) && dynamic_cast<Enemy *>(obj.get())) {
                 position.intersects = true;
             }
-        
+    
             // Both player and enemy dies when intersects with fire
             if (
                 (dynamic_cast<Player *>(object) || dynamic_cast<Enemy *>(object)) &&
@@ -52,31 +58,47 @@ ComplexPosition Movement::getPossibleMove (Scene &scene, T *object) {
                 ) {
                 position.intersects = true;
             }
+    
+            // If fire meets the block, block is removed from the scene
+            if (
+                dynamic_cast<Fire *>(object) &&
+                dynamic_cast<Block *>(obj.get()) &&
+                (dynamic_cast<Block *>(obj.get()))->type == "block"
+                ) {
+                i = scene.objects.erase(i);
+                position.intersects = true;
+                continue;
+            }
         }
         
         auto block = dynamic_cast<Block *>(obj.get());
         auto bomb = dynamic_cast<Bomb *>(obj.get());
-    
-        if (!block && !bomb) continue;
+        
+        if (!block && !bomb) {
+            i++;
+            continue;
+        }
+        
         Object *o = (block) ? (Object *) block : (Object *) bomb;
-    
+        
         if (distance(object->position.z, o->position.z) == 2
             && o->position.x == object->position.x) {
-        
+            
             if (o->position.z - object->position.z == 2) {
                 position.move.up = false;
             }
             else position.move.down = false;
         }
-    
+        
         if (distance(object->position.x, o->position.x) == 2
             && o->position.z == object->position.z) {
-        
+            
             if (o->position.x - object->position.x == 2) {
                 position.move.left = false;
             }
             else position.move.right = false;
         }
+        i++;
     }
     
     
@@ -104,4 +126,8 @@ ComplexPosition Movement::getPossibleMove (Scene &scene, T *object) {
 template ComplexPosition Movement::getPossibleMove<Player> (Scene &scene, Player *player);
 
 template ComplexPosition Movement::getPossibleMove<Enemy> (Scene &scene, Enemy *enemy);
+
+template ComplexPosition Movement::getPossibleMove<Fire> (Scene &scene, Fire *fire);
+
+
 
