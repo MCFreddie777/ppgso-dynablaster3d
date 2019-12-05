@@ -113,6 +113,7 @@ add_executable(DYNABlaster3D
         ../src/objects/player.cpp
         ../src/objects/enemy.cpp
         ../src/objects/bomb.cpp
+        ../src/objects/fire.cpp
         )
 target_link_libraries(DYNABlaster3D ppgso shaders)
 install(TARGETS DYNABlaster3D DESTINATION .)

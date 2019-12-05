@@ -26,6 +26,10 @@ Enemy::Enemy (vec3 position) {
 
 bool Enemy::update (Scene &scene, float dt) {
     ComplexPosition complexPosition = Movement::getPossibleMove(scene, this);
+    
+    if (complexPosition.intersects)
+        return false;
+    
     if (scene.animate) roam(complexPosition, dt);
     generateModelMatrix();
     return true;

@@ -1,6 +1,7 @@
 //
 // Created by František Gič on 30/11/2019.
 //
+#pragma once
 
 #ifndef DYNABLASTER3D_PLAYER_H
 #define DYNABLASTER3D_PLAYER_H
@@ -8,6 +9,19 @@
 #include "src/common/scene.h"
 #include "src/common/movement.h"
 #include "object.h"
+
+class BombInfo {
+
+public:
+    uint number = 0;
+    uint max;
+    uint radius = 1;
+    
+    BombInfo (uint maxBombs) {
+        this->max = 1;
+    }
+    
+};
 
 class Player final : public Object {
 
@@ -26,7 +40,9 @@ private:
 
 public:
     
-    Player (vec3 position);
+    BombInfo bombs = BombInfo(1u);
+    
+    explicit Player (vec3 position);
     
     bool update (Scene &scene, float dt) override;
     

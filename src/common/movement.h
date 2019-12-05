@@ -2,6 +2,8 @@
 // Created by František Gič on 02/12/2019.
 //
 
+#pragma once
+
 #ifndef DYNABLASTER3D_MOVEMENT_H
 #define DYNABLASTER3D_MOVEMENT_H
 

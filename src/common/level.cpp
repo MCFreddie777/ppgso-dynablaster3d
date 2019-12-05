@@ -13,6 +13,7 @@ using namespace std;
 
 Level::Level (uint size) {
     this->size = size;
+    
     this->objects = {
         .blocks =  {
             .maxNumber = (int) ((size * size) * 0.17),
@@ -134,8 +135,8 @@ void Level::create (Scene &scene) {
                 scene.objects.push_back(move(player));
             }
             else if (level[i][j] == 'E') {
-                auto player = make_unique<Enemy>(position);
-                scene.objects.push_back(move(player));
+                auto enemy = make_unique<Enemy>(position);
+                scene.objects.push_back(move(enemy));
             }
         }
     }
@@ -181,4 +182,8 @@ bool Level::canSpawn (vec2 position, int radius) {
         }
     }
     return suitablePos;
+}
+
+vector<vector<char>> Level::get () {
+    return this->level;
 }

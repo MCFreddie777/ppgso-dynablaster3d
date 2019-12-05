@@ -4,8 +4,13 @@
 
 #include <shaders/diffuse_vert_glsl.h>
 #include <shaders/diffuse_frag_glsl.h>
+#include <src/common/movement.h>
 
+#pragma once
+
+#include "player.h"
 #include "bomb.h"
+#include "fire.h"
 
 using namespace std;
 using namespace glm;
@@ -16,8 +21,9 @@ unique_ptr<Mesh> Bomb::mesh;
 unique_ptr<Texture> Bomb::texture;
 unique_ptr<Shader> Bomb::shader;
 
-Bomb::Bomb (vec3 position) {
+Bomb::Bomb (vec3 position, Player &player) {
     this->position = position;
+    this->player = &player;
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
     if (!texture) texture = make_unique<Texture>(image::loadBMP("../resources/textures/bomb.bmp"));
@@ -25,6 +31,12 @@ Bomb::Bomb (vec3 position) {
 }
 
 bool Bomb::update (Scene &scene, float dt) {
+    age += dt;
+    if (age > maxAge) {
+        explode(scene, player->bombs.radius);
+        return false;
+    }
+    
     generateModelMatrix();
     return true;
 }
@@ -45,4 +57,43 @@ void Bomb::render (Scene &scene) {
     shader->setUniform("Texture", *texture);
     
     mesh->render();
+}
+
+void Bomb::explode (Scene &scene, uint radius) {
+    this->player->bombs.number--;
+    
+    // Create fire element (radius) blocks from the bomb position
+    for (
+        uint i = ((uint) position.x) / 2 - radius;
+        i <= ((uint) position.x) / 2 + radius;
+        i++) {
+        
+        for (
+            uint j = ((uint) position.z) / 2 - radius;
+            j <= ((uint) position.z) / 2 + radius;
+            j++) {
+            
+            // Check for level boundaries and walls
+            if (
+                (i == ((uint) position.x) / 2 || j == ((uint) position.z) / 2) &&
+                i > 0 &&
+                j > 0 &&
+                ((uint) i) < scene.level->size &&
+                ((uint) j) < scene.level->size &&
+                (scene.level->get()[i][j] != 'W')
+                ) {
+                
+                float fireRot = (i == ((uint) position.x) / 2) ? (PI / 2.0f) : 0;
+                auto fire = make_unique<Fire>(vec3{i * 2, position.y, j * 2}, fireRot);
+                scene.objects.push_back(move(fire));
+                
+                // Second fire is being generated on the position of bomb with rotation of 90
+                // degrees to create the X effect
+                if (i == ((uint) position.x) / 2 && j == ((uint) position.z) / 2) {
+                    auto fire = make_unique<Fire>(vec3{i * 2, position.y, j * 2}, 0);
+                    scene.objects.push_back(move(fire));
+                }
+            }
+        }
+    }
 }

@@ -1,15 +1,19 @@
 //
 // Created by František Gič on 30/11/2019.
 //
+#pragma once
 
 #ifndef DYNABLASTER3D_LEVEL_H
 #define DYNABLASTER3D_LEVEL_H
 
 #include <vector>
-
-#include "scene.h"
+#include <bin/ppgso/lib/ppgso.h>
+#include <GLUT/glut.h>
 
 using namespace std;
+using namespace glm;
+
+class Scene;
 
 typedef struct ObjectCounter {
     double spawnRate;
@@ -27,7 +31,6 @@ class Level {
 
 private:
     
-    uint size;
     vector<vector<char>> level;
     LevelObjects objects;
     
@@ -37,11 +40,13 @@ private:
 
 
 public:
+    uint size;
     
-    explicit Level (uint size);
+    Level (uint size);
     
     void create (Scene &scene);
     
+    vector<vector<char>> get ();
 };
 
 #endif //DYNABLASTER3D_LEVEL_H

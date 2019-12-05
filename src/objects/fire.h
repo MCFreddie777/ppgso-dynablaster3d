@@ -1,39 +1,32 @@
 //
-// Created by František Gič on 30/11/2019.
+// Created by František Gič on 04/12/2019.
 //
 #pragma once
 
-#ifndef DYNABLASTER3D_ENEMY_H
-#define DYNABLASTER3D_ENEMY_H
+#ifndef DYNABLASTER3D_FIRE_H
+#define DYNABLASTER3D_FIRE_H
 
 #include "src/common/scene.h"
-#include "src/common/movement.h"
 #include "object.h"
 
-class Enemy final : public Object {
 
+class Fire final : public Object {
 private:
     
-    float delay = 0.0f;
-    int direction = 0;
+    float age{0.0f};
+    float maxAge{2.5f};
     
     static std::unique_ptr<ppgso::Mesh> mesh;
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
-    
-    void roam (ComplexPosition complexPosition, float dt);
-
 public:
     
-    Enemy (vec3 position);
+    Fire (vec3 position, float rotation);
     
     bool update (Scene &scene, float dt) override;
     
     void render (Scene &scene) override;
-    
 };
 
-#endif //DYNABLASTER3D_ENEMY_H
 
-
-
+#endif //DYNABLASTER3D_FIRE_H

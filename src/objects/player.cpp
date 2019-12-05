@@ -7,7 +7,6 @@
 
 #include "player.h"
 #include "block.h"
-#include "enemy.h"
 #include "bomb.h"
 
 using namespace std;
@@ -31,6 +30,7 @@ Player::Player (vec3 position) {
 bool Player::update (Scene &scene, float dt) {
     ComplexPosition complexPosition = Movement::getPossibleMove(scene, this);
     
+    // Check if player intersects with enemy or fire
     if (complexPosition.intersects) {
         scene.animate = false;
         return false; // die
@@ -65,14 +65,12 @@ void Player::handleMovement (
 ) {
     
     delay += dt;
-    
     if (delay > 0.25f) {
         delay = 0;
     
         if (keyboard[GLFW_KEY_W] && complexPosition.move.up) {
             position.z += 2;
             rotation.z = 0;
-            
         }
         if (keyboard[GLFW_KEY_S] && complexPosition.move.down) {
             position.z -= 2;
@@ -85,13 +83,13 @@ void Player::handleMovement (
         if (keyboard[GLFW_KEY_D] && complexPosition.move.right) {
             position.x -= 2;
             rotation.z = -PI / 2.0f;
-            
         }
-        
-        // TODO:
         if (keyboard[GLFW_KEY_SPACE]) {
-            auto player = make_unique<Bomb>(position);
-            scene.objects.push_back(move(player));
+            if (this->bombs.number != this->bombs.max) {
+                auto bomb = make_unique<Bomb>(position, *this);
+                scene.objects.push_back(move(bomb));
+                this->bombs.number++;
+            }
         }
     }
 }

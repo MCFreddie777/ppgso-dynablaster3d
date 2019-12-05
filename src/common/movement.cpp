@@ -5,9 +5,12 @@
 #include <src/objects/block.h>
 #include <src/objects/player.h>
 #include <src/objects/enemy.h>
+#include <src/objects/bomb.h>
+#include <src/objects/fire.h>
 #include "movement.h"
 #include "scene.h"
 
+#pragma once
 
 template<typename T>
 ComplexPosition Movement::getPossibleMove (Scene &scene, T *object) {
@@ -30,41 +33,46 @@ ComplexPosition Movement::getPossibleMove (Scene &scene, T *object) {
         // Ignore self in scene
         if (obj.get() == object)
             continue;
+    
+        // Check for intersections
+        if (
+            distance(object->position.z, obj->position.z) == 0 &&
+            distance(object->position.x, obj->position.x) == 0
+            ) {
         
-        if (dynamic_cast<Enemy *>(obj.get())) {
+            // Player dies when intersects with enemy
+            if (dynamic_cast<Player *>(object) && dynamic_cast<Enemy *>(obj.get())) {
+                position.intersects = true;
+            }
+        
+            // Both player and enemy dies when intersects with fire
             if (
-                distance(object->position.z, obj->position.z) == 0 &&
-                distance(object->position.x, obj->position.x) == 0
+                (dynamic_cast<Player *>(object) || dynamic_cast<Enemy *>(object)) &&
+                dynamic_cast<Fire *>(obj.get())
                 ) {
-                if (dynamic_cast<Player *>(object)) {
-                    position.intersects = true;
-                }
+                position.intersects = true;
             }
         }
         
         auto block = dynamic_cast<Block *>(obj.get());
-        if (!block) continue;
+        auto bomb = dynamic_cast<Bomb *>(obj.get());
+    
+        if (!block && !bomb) continue;
+        Object *o = (block) ? (Object *) block : (Object *) bomb;
+    
+        if (distance(object->position.z, o->position.z) == 2
+            && o->position.x == object->position.x) {
         
-        
-        if (distance(object->position.z, block->position.z) == 2
-            && block->position.x == object->position.x) {
-
-
-//            if (dynamic_cast<Enemy *>(object)) {
-//                std::cout << "Object.GetType(): " << typeid(object).name() << '\n';
-//                position.intersects = object;
-//            }
-            
-            if (block->position.z - object->position.z == 2) {
+            if (o->position.z - object->position.z == 2) {
                 position.move.up = false;
             }
             else position.move.down = false;
         }
+    
+        if (distance(object->position.x, o->position.x) == 2
+            && o->position.z == object->position.z) {
         
-        if (distance(object->position.x, block->position.x) == 2
-            && block->position.z == object->position.z) {
-            
-            if (block->position.x - object->position.x == 2) {
+            if (o->position.x - object->position.x == 2) {
                 position.move.left = false;
             }
             else position.move.right = false;
