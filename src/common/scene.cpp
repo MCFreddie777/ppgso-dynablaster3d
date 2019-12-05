@@ -6,6 +6,11 @@
 
 void Scene::update(float time) {
     
+    // End of game when all blocks are destroyed
+    if (this->level && this->level->blockCount == 0) {
+        this->animate = false;
+    }
+    
     // Use iterator to update all objects so we can remove while iterating
     auto i = std::begin(objects);
     

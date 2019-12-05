@@ -41,6 +41,7 @@ private:
 
 public:
     uint size;
+    uint blockCount = 0;
     
     Level (uint size);
     

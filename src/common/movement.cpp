@@ -66,7 +66,7 @@ ComplexPosition Movement::getPossibleMove (Scene &scene, T *object) {
                 (dynamic_cast<Block *>(obj.get()))->type == "block"
                 ) {
                 i = scene.objects.erase(i);
-                position.intersects = true;
+                scene.level->blockCount--;
                 continue;
             }
         }

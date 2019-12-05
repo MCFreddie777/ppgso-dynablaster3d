@@ -32,8 +32,9 @@ bool Player::update (Scene &scene, float dt) {
     
     // Check if player intersects with enemy or fire
     if (complexPosition.intersects) {
+        // End of the game, plejer is ded. NOOOOOOOOOOOO! Hulk sad.
         scene.animate = false;
-        return false; // die
+        return false;
     }
     
     handleMovement(scene.keyboard, dt, complexPosition, scene);

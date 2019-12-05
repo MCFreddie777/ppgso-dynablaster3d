@@ -129,6 +129,7 @@ void Level::create (Scene &scene) {
             else if (level[i][j] == 'B') {
                 auto block = make_unique<Block>(position, "block");
                 scene.objects.push_back(move(block));
+                this->blockCount++;
             }
             else if (level[i][j] == 'P') {
                 auto player = make_unique<Player>(position);
