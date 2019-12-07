@@ -8,6 +8,7 @@
 #include "src/objects/block.h"
 #include "src/objects/player.h"
 #include "src/objects/enemy.h"
+#include "src/objects/powerup.h"
 
 using namespace std;
 
@@ -48,28 +49,8 @@ void Level::generate () {
                 || (i % 2 == 0 && j % 2 == 0)) {
                 level[i][j] = ObjectType::WALL;
             }
-    
-            /* Doesn't seem much random
-            double random = rand() / (RAND_MAX + 1.);
-            
-            if ((random < objects.player.spawnRate)
-                && (objects.player.number < objects.player.maxNumber)) {
-                
-                level[i][j] = 'P';
-                objects.player.number++;
-            }
-            else if ((random < objects.enemies.spawnRate)
-                     && (objects.enemies.number < objects.enemies.maxNumber)) {
-                level[i][j] = 'E';
-                objects.enemies.number++;
-            }
-            else if ((random < objects.blocks.spawnRate)) {
-                level[i][j] = 'B';
-            }
-             */
         }
     }
-    
     
     vec2 position;
     
@@ -84,6 +65,7 @@ void Level::generate () {
         }
     }
     
+    // Radius how much blocks shouldn't enemies and blocks be spawned around player
     int radius = 1;
     
     // Generate enemies
@@ -136,6 +118,7 @@ void Level::create (Scene &scene) {
                 }
                 case ObjectType::PLAYER: {
                     auto player = make_unique<Player>(position);
+                    dynamic_cast<Game &>(scene).player = player.get();
                     scene.objects.push_back(move(player));
                     break;
                 }
@@ -193,4 +176,23 @@ bool Level::canSpawn (vec2 position, int radius) {
 
 vector<vector<char>> Level::get () {
     return this->level;
+}
+
+
+void Level::dropPowerUp (Game &game) {
+    srand(time(NULL));
+    
+    int trial = 0;
+    
+    while (1) {
+        // I know, its weird. I have a size of 15, but each cube is of size 2.
+        // rand() % (max - min + 1) + min;
+        vec3 position{2 * (rand() % ((size) - 2) + 2), 20, 2 * (rand() % ((size) - 2) + 2)};
+        auto obj = Movement::getIntersectingObject(game, position);
+        if (!obj) {
+            auto powerUp = make_unique<PowerUp>(position);
+            game.objects.push_back(move(powerUp));
+            return;
+        }
+    }
 }

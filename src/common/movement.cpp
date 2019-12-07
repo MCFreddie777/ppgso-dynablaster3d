@@ -25,6 +25,19 @@ Object *Movement::getIntersectingObject (Game &scene, Object *object) {
     }
 }
 
+Object *Movement::getIntersectingObject (Game &scene, vec3 position) {
+    for (auto &obj : scene.objects) {
+        
+        if (
+            distance(position.z, obj->position.z) == 0 &&
+            distance(position.x, obj->position.x) == 0
+            ) {
+            return obj.get();
+        }
+    }
+    return nullptr;
+}
+
 template<typename T>
 ComplexPosition Movement::getPossibleMove (Game &scene, T *object) {
     

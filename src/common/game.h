@@ -8,13 +8,18 @@
 
 #include "scene.h"
 
+class Player;
+
 class Game final : public Scene {
 private:
     uint size = 15;
+    float time = 0;
+
 public:
-    
     bool animate = true;
-    std::unique_ptr<Level> level;
+    
+    unique_ptr<Level> level;
+    Player *player;
     
     void init ();
     

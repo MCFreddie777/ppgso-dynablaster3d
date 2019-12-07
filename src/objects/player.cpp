@@ -2,10 +2,12 @@
 // Created by František Gič on 30/11/2019.
 //
 
+#include "src/common/scene.h"
 #include "player.h"
 #include "enemy.h"
 #include "bomb.h"
 #include "fire.h"
+#include "powerup.h"
 
 using namespace std;
 using namespace glm;
@@ -37,9 +39,9 @@ bool Player::update (Scene &scene, float dt) {
         return false;
     }
     
-    
     handleMovement(scene.keyboard, dt, complexPosition, scene);
     generateModelMatrix();
+    
     return true;
 }
 

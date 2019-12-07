@@ -6,6 +6,8 @@
 #include <shaders/diffuse_frag_glsl.h>
 
 #include "block.h"
+#include "src/common/movement.h"
+#include "fire.h"
 
 using namespace std;
 using namespace glm;
@@ -26,6 +28,12 @@ Block::Block (vec3 position, const string texturePath, const string meshPath) {
 }
 
 bool Block::update (Scene &scene, float dt) {
+    auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), this);
+    
+    // If fire meets the block, it is removed from the scene
+    if (dynamic_cast<Fire *>(obj) && this->type == "block")
+        return false;
+    
     generateModelMatrix();
     return true;
 }

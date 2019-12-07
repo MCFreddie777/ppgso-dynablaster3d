@@ -15,6 +15,8 @@ using namespace glm;
 
 class Scene;
 
+class Game;
+
 enum ObjectType {
     PLAYER = 'P',
     ENEMY = 'E',
@@ -56,6 +58,8 @@ public:
     void create (Scene &scene);
     
     vector<vector<char>> get ();
+    
+    void dropPowerUp (Game &game);
 };
 
 #endif //DYNABLASTER3D_LEVEL_H

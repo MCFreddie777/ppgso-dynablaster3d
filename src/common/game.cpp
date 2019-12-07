@@ -18,8 +18,16 @@ void Game::init () {
 
 void Game::update (float time) {
     // End of game when all blocks are destroyed
+    
     if (this->level && this->level->blockCount == 0) {
         this->animate = false;
+    }
+    
+    // Spawn power ups after certain amount of time
+    this->time += time;
+    if (this->time > 15.0f) {
+        this->level->dropPowerUp(*this);
+        this->time = 0;
     }
     
     Scene::update(time);

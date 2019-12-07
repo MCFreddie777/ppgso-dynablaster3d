@@ -29,6 +29,8 @@ class Movement {
 public:
     static Object *getIntersectingObject (Game &scene, Object *object);
     
+    static Object *getIntersectingObject (Game &scene, vec3 position);
+    
     template<typename T>
     static ComplexPosition getPossibleMove (Game &scene, T *object);
 };
