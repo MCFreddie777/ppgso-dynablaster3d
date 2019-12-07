@@ -21,7 +21,7 @@ private:
 
 public:
     string type;
-    vec3 rotMomentum;
+    vec3 momentum = {0.0f, 0.0f, linearRand(-PI / 4.0f, PI / 4.0f)};
     vec3 speed = {0, -3.0f, 0};
     
     PowerUp (vec3 position);

@@ -16,6 +16,7 @@ private:
     
     float age{0.0f};
     float maxAge{3.5f};
+    float currScale{0.0f};
     Player *player;
     
     static std::unique_ptr<ppgso::Mesh> mesh;

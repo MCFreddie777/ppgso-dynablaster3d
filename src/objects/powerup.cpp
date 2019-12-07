@@ -19,8 +19,6 @@ unique_ptr<Shader> PowerUp::shader;
 unique_ptr<Mesh> PowerUp::mesh;
 
 PowerUp::PowerUp (vec3 position) {
-    rotMomentum = {0.0f, 0.0f, linearRand(-PI / 4.0f, PI / 4.0f)};
-    
     this->type = ((rand() % 2)) ? "bomb" : "fire";
     
     this->position = position;
@@ -42,10 +40,11 @@ bool PowerUp::update (Scene &scene, float dt) {
     else
         speed = vec3{0, 0, 0};
     
-    rotation += rotMomentum * dt;
+    rotation += momentum * dt;
     
     auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), this);
     
+    // If powerup is collected by the player
     if (dynamic_cast<Player *>(obj)) {
         if (this->type == "bomb") {
             dynamic_cast<Game &>(scene).player->bombs.max++;
