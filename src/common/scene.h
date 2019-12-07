@@ -15,6 +15,8 @@
 #include "src/common/camera.h"
 #include "src/common/level.h"
 
+class SceneWindow;
+
 class Scene {
 public:
     
@@ -48,6 +50,7 @@ public:
         bool left, right;
     } cursor;
     
+    virtual void handleKey (int key, int action, SceneWindow *window);
 };
 
 

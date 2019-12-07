@@ -32,3 +32,42 @@ void Game::update (float time) {
     
     Scene::update(time);
 }
+
+void Game::handleKey (int key, int action, SceneWindow *window) {
+    if (action == GLFW_PRESS) {
+        switch (key) {
+            
+            //Exit to the menu
+            case (GLFW_KEY_ESCAPE): {
+                window->openMenu();
+                break;
+            }
+                
+                // Restart
+            case (GLFW_KEY_R): {
+                window->startGame();
+                break;
+            }
+                // Pause
+            case (GLFW_KEY_P): {
+                this->animate = !this->animate;
+                break;
+            }
+                
+                // Switch camera view
+            case (GLFW_KEY_C): {
+                this->camera->switchView();
+                break;
+            }
+        }
+    }
+    
+    // Handle camera
+    if (std::any_of(
+        begin(this->camera->controls),
+        end(this->camera->controls),
+        [&] (int i) { return i == key; }
+    )) {
+        this->camera->handleKey(key);
+    }
+}

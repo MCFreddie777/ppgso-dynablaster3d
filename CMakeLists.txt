@@ -103,10 +103,12 @@ target_include_directories(ppgso PUBLIC
 # TARGETS
 #
 add_executable(DYNABlaster3D
+        ../src/common/scenewindow.cpp
         ../src/main.cpp
         ../src/common/movement.cpp
         ../src/common/scene.cpp
         ../src/common/game.cpp
+        ../src/common/menu.cpp
         ../src/common/camera.cpp
         ../src/common/level.cpp
         ../src/objects/object.cpp

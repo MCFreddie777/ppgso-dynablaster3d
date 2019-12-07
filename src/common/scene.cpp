@@ -63,5 +63,8 @@ std::vector<Object *> Scene::intersect (const glm::vec3 &position, const glm::ve
     return intersected;
 }
 
+void Scene::handleKey (int key, int action, SceneWindow *window) {
+}
+
 
 
