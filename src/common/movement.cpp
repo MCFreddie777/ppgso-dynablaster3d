@@ -8,12 +8,10 @@
 #include <src/objects/bomb.h>
 #include <src/objects/fire.h>
 #include "movement.h"
-#include "scene.h"
-
-#pragma once
+#include "game.h"
 
 template<typename T>
-ComplexPosition Movement::getPossibleMove (Scene &scene, T *object) {
+ComplexPosition Movement::getPossibleMove (Game &scene, T *object) {
     
     ComplexPosition position{
         {
@@ -123,11 +121,11 @@ ComplexPosition Movement::getPossibleMove (Scene &scene, T *object) {
     return position;
 }
 
-template ComplexPosition Movement::getPossibleMove<Player> (Scene &scene, Player *player);
+template ComplexPosition Movement::getPossibleMove<Player> (Game &scene, Player *player);
 
-template ComplexPosition Movement::getPossibleMove<Enemy> (Scene &scene, Enemy *enemy);
+template ComplexPosition Movement::getPossibleMove<Enemy> (Game &scene, Enemy *enemy);
 
-template ComplexPosition Movement::getPossibleMove<Fire> (Scene &scene, Fire *fire);
+template ComplexPosition Movement::getPossibleMove<Fire> (Game &scene, Fire *fire);
 
 
 

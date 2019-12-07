@@ -28,12 +28,13 @@ Player::Player (vec3 position) {
 }
 
 bool Player::update (Scene &scene, float dt) {
-    ComplexPosition complexPosition = Movement::getPossibleMove(scene, this);
+    ComplexPosition complexPosition =
+        Movement::getPossibleMove(dynamic_cast<Game &>(scene), this);
     
     // Check if player intersects with enemy or fire
     if (complexPosition.intersects) {
-        // End of the game, plejer is ded. NOOOOOOOOOOOO! Hulk sad.
-        scene.animate = false;
+        // End of the game, pljeer is ded. NOOOOOOOOOOOO! Hulk sad.
+        dynamic_cast<Game &>(scene).animate = false;
         return false;
     }
     

@@ -17,15 +17,14 @@
 
 class Scene {
 public:
-    bool animate = true;
     
-    void update (float time);
+    virtual void update (float time);
     
     void render ();
     
-    std::vector<Object *> intersect (const glm::vec3 &position, const glm::vec3 &direction);
+    void init ();
     
-    std::unique_ptr<Level> level;
+    std::vector<Object *> intersect (const glm::vec3 &position, const glm::vec3 &direction);
     
     // Camera object
     std::unique_ptr<Camera> camera;

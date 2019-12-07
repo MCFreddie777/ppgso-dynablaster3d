@@ -29,7 +29,7 @@ Fire::Fire (vec3 position, float rotation) {
 }
 
 bool Fire::update (Scene &scene, float dt) {
-    Movement::getPossibleMove(scene, this);
+    Movement::getPossibleMove(dynamic_cast<Game &>(scene), this);
     
     age += dt;
     if (age > maxAge) {

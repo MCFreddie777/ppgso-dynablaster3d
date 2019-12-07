@@ -7,7 +7,7 @@
 #ifndef DYNABLASTER3D_MOVEMENT_H
 #define DYNABLASTER3D_MOVEMENT_H
 
-#include "scene.h"
+#include "game.h"
 
 class Move {
 public:
@@ -28,7 +28,7 @@ public:
 class Movement {
 public:
     template<typename T>
-    static ComplexPosition getPossibleMove (Scene &scene, T *object);
+    static ComplexPosition getPossibleMove (Game &scene, T *object);
 };
 
 #endif //DYNABLASTER3D_MOVEMENT_H

@@ -33,7 +33,7 @@ Bomb::Bomb (vec3 position, Player &player) {
 bool Bomb::update (Scene &scene, float dt) {
     age += dt;
     if (age > maxAge) {
-        explode(scene, player->bombs.radius);
+        explode(dynamic_cast<Game &>(scene), player->bombs.radius);
         return false;
     }
     
@@ -59,7 +59,7 @@ void Bomb::render (Scene &scene) {
     mesh->render();
 }
 
-void Bomb::explode (Scene &scene, uint radius) {
+void Bomb::explode (Game &scene, uint radius) {
     this->player->bombs.number--;
     
     // Create fire element (radius) blocks from the bomb position
@@ -80,7 +80,7 @@ void Bomb::explode (Scene &scene, uint radius) {
                 j > 0 &&
                 ((uint) i) < scene.level->size &&
                 ((uint) j) < scene.level->size &&
-                (scene.level->get()[i][j] != 'W')
+                (scene.level->get()[i][j] != ObjectType::WALL)
                 ) {
                 
                 float fireRot = (i == ((uint) position.x) / 2) ? (PI / 2.0f) : 0;

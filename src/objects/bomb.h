@@ -6,7 +6,7 @@
 #ifndef DYNABLASTER3D_BOMB_H
 #define DYNABLASTER3D_BOMB_H
 
-#include "src/common/scene.h"
+#include "src/common/game.h"
 #include "object.h"
 #include "player.h"
 
@@ -22,7 +22,7 @@ private:
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
     
-    void explode (Scene &scene, uint radius);
+    void explode (Game &scene, uint radius);
 
 public:
     
