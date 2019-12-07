@@ -30,7 +30,7 @@ Player::Player (vec3 position) {
 }
 
 bool Player::update (Scene &scene, float dt) {
-    ComplexPosition complexPosition = Movement::getPossibleMove(dynamic_cast<Game &>(scene), this);
+    ComplexPosition complexPosition = Movement::getPossibleMove(dynamic_cast<Game &> (scene), this);
     
     // Check if player intersects with enemy or fire
     auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), this);
@@ -45,7 +45,6 @@ bool Player::update (Scene &scene, float dt) {
     
     handleMovement(scene.keyboard, dt, complexPosition, scene);
     generateModelMatrix();
-    
     return true;
 }
 
@@ -71,7 +70,6 @@ void Player::handleMovement (
     map<int, int> keyboard, float dt, ComplexPosition complexPosition,
     Scene &scene
 ) {
-    
     delay += dt;
     if (delay > 0.25f) {
         delay = 0;

@@ -182,8 +182,6 @@ vector<vector<char>> Level::get () {
 void Level::dropPowerUp (Game &game) {
     srand(time(NULL));
     
-    int trial = 0;
-    
     while (1) {
         // I know, its weird. I have a size of 15, but each cube is of size 2.
         // rand() % (max - min + 1) + min;

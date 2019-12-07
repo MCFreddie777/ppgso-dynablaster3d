@@ -2,6 +2,8 @@
 // Created by František Gič on 07/12/2019.
 //
 
+#include <thread>
+#include <chrono>
 #include "game.h"
 #include "scenewindow.h"
 
@@ -21,6 +23,8 @@ void Game::update (float time) {
     
     if (this->level && this->level->blockCount == 0) {
         this->animate = false;
+        this_thread::sleep_for(chrono::seconds(2));
+        this->windowRef->openMenu();
     }
     
     // Spawn power ups after certain amount of time

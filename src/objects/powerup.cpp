@@ -37,9 +37,10 @@ bool PowerUp::update (Scene &scene, float dt) {
         position += (speed * dt);
         speed += speed * dt;
     }
-    else
+    else {
+        if (position.y != 2) position.y = 2;
         speed = vec3{0, 0, 0};
-    
+    }
     rotation += momentum * dt;
     
     auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), this);

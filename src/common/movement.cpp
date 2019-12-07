@@ -18,7 +18,8 @@ Object *Movement::getIntersectingObject (Game &scene, Object *object) {
         
         if (
             distance(object->position.z, obj->position.z) == 0 &&
-            distance(object->position.x, obj->position.x) == 0
+            distance(object->position.x, obj->position.x) == 0 &&
+            object->position.y == obj->position.y
             ) {
             return obj.get();
         }
@@ -30,7 +31,8 @@ Object *Movement::getIntersectingObject (Game &scene, vec3 position) {
         
         if (
             distance(position.z, obj->position.z) == 0 &&
-            distance(position.x, obj->position.x) == 0
+            distance(position.x, obj->position.x) == 0 &&
+            position.y == obj->position.y
             ) {
             return obj.get();
         }
@@ -67,23 +69,31 @@ ComplexPosition Movement::getPossibleMove (Game &scene, T *object) {
             continue;
         
         Object *o = (block) ? (Object *) block : (Object *) bomb;
-        
-        if (distance(object->position.z, o->position.z) == 2
-            && o->position.x == object->position.x) {
-            
+    
+        if (
+            distance(object->position.z, o->position.z) == 2
+            && o->position.x == object->position.x &&
+            o->position.y == object->position.y
+            ) {
             if (o->position.z - object->position.z == 2) {
                 position.move.up = false;
             }
-            else position.move.down = false;
+            else {
+                position.move.down = false;
+            }
         }
-        
-        if (distance(object->position.x, o->position.x) == 2
-            && o->position.z == object->position.z) {
-            
+    
+        if (
+            distance(object->position.x, o->position.x) == 2 &&
+            o->position.z == object->position.z &&
+            o->position.y == object->position.y
+            ) {
             if (o->position.x - object->position.x == 2) {
                 position.move.left = false;
             }
-            else position.move.right = false;
+            else {
+                position.move.right = false;
+            }
         }
     }
     
