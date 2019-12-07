@@ -8,8 +8,8 @@
 
 #include "src/common/game.h"
 #include "object.h"
-#include "player.h"
 
+class Player;
 
 class Bomb final : public Object {
 private:

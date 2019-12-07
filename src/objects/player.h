@@ -6,9 +6,15 @@
 #ifndef DYNABLASTER3D_PLAYER_H
 #define DYNABLASTER3D_PLAYER_H
 
+#include <shaders/diffuse_vert_glsl.h>
+#include <shaders/diffuse_frag_glsl.h>
+
 #include "src/common/scene.h"
 #include "src/common/movement.h"
 #include "object.h"
+#include "block.h"
+
+class Bomb;
 
 class BombInfo {
 
@@ -20,7 +26,6 @@ public:
     BombInfo (uint maxBombs) {
         this->max = 1;
     }
-    
 };
 
 class Player final : public Object {

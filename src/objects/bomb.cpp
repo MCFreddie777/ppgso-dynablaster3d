@@ -6,10 +6,8 @@
 #include <shaders/diffuse_frag_glsl.h>
 #include <src/common/movement.h>
 
-#pragma once
-
-#include "player.h"
 #include "bomb.h"
+#include "player.h"
 #include "fire.h"
 
 using namespace std;

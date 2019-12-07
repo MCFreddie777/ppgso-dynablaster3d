@@ -7,6 +7,7 @@
 #include <src/common/movement.h>
 
 #include "fire.h"
+#include "block.h"
 
 using namespace std;
 using namespace glm;
@@ -29,11 +30,33 @@ Fire::Fire (vec3 position, float rotation) {
 }
 
 bool Fire::update (Scene &scene, float dt) {
-    Movement::getPossibleMove(dynamic_cast<Game &>(scene), this);
-    
     age += dt;
     if (age > maxAge) {
         return false;
+    }
+    
+    auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), this);
+    
+    // If fire meets the destroyable block, block is removed from the scene
+    if (
+        dynamic_cast<Block *>(obj) &&
+        (dynamic_cast<Block *>(obj))->type == "block"
+        ) {
+        
+        auto i = std::begin(scene.objects);
+        while (i != std::end(scene.objects)) {
+            
+            unique_ptr<Object> &object = *i;
+            
+            if (object.get() == obj) {
+                i = scene.objects.erase(i);
+                dynamic_cast<Game &>(scene).level->blockCount--;
+            }
+            else {
+                i++;
+            }
+            continue;
+        }
     }
     
     generateModelMatrix();

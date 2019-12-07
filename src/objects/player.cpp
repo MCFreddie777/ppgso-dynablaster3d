@@ -2,12 +2,10 @@
 // Created by František Gič on 30/11/2019.
 //
 
-#include <shaders/diffuse_vert_glsl.h>
-#include <shaders/diffuse_frag_glsl.h>
-
 #include "player.h"
-#include "block.h"
+#include "enemy.h"
 #include "bomb.h"
+#include "fire.h"
 
 using namespace std;
 using namespace glm;
@@ -28,15 +26,17 @@ Player::Player (vec3 position) {
 }
 
 bool Player::update (Scene &scene, float dt) {
-    ComplexPosition complexPosition =
-        Movement::getPossibleMove(dynamic_cast<Game &>(scene), this);
+    ComplexPosition complexPosition = Movement::getPossibleMove(dynamic_cast<Game &>(scene), this);
     
     // Check if player intersects with enemy or fire
-    if (complexPosition.intersects) {
-        // End of the game, pljeer is ded. NOOOOOOOOOOOO! Hulk sad.
+    auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), this);
+    
+    // End of the game, pljeer is ded. NOOOOOOOOOOOO! Hulk sad.
+    if (dynamic_cast<Enemy *>(obj) || dynamic_cast<Fire *>(obj)) {
         dynamic_cast<Game &>(scene).animate = false;
         return false;
     }
+    
     
     handleMovement(scene.keyboard, dt, complexPosition, scene);
     generateModelMatrix();

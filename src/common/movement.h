@@ -7,7 +7,8 @@
 #ifndef DYNABLASTER3D_MOVEMENT_H
 #define DYNABLASTER3D_MOVEMENT_H
 
-#include "game.h"
+#include <src/objects/object.h>
+#include <src/common/game.h>
 
 class Move {
 public:
@@ -20,13 +21,14 @@ public:
 class ComplexPosition {
 public:
     Move move;
-    bool intersects;
     bool inCorner;
     bool inCrossRoads;
 };
 
 class Movement {
 public:
+    static Object *getIntersectingObject (Game &scene, Object *object);
+    
     template<typename T>
     static ComplexPosition getPossibleMove (Game &scene, T *object);
 };

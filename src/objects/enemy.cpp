@@ -6,6 +6,7 @@
 #include <shaders/diffuse_frag_glsl.h>
 
 #include "enemy.h"
+#include "fire.h"
 
 using namespace std;
 using namespace glm;
@@ -27,8 +28,12 @@ Enemy::Enemy (vec3 position) {
 bool Enemy::update (Scene &scene, float dt) {
     ComplexPosition complexPosition = Movement::getPossibleMove(dynamic_cast<Game &>(scene), this);
     
-    if (complexPosition.intersects)
+    // Check if enemy intersects with fire
+    auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), this);
+    
+    if (dynamic_cast<Fire *>(obj)) {
         return false;
+    }
     
     if (dynamic_cast<Game &>(scene).animate) roam(complexPosition, dt);
     generateModelMatrix();
