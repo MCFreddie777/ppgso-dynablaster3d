@@ -15,6 +15,14 @@ using namespace glm;
 
 class Scene;
 
+enum ObjectType {
+    PLAYER = 'P',
+    ENEMY = 'E',
+    WALL = 'W',
+    BLOCK = 'B',
+    FIRE = 'F'
+};
+
 typedef struct ObjectCounter {
     double spawnRate;
     int maxNumber;

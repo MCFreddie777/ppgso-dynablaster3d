@@ -46,7 +46,7 @@ void Level::generate () {
             // corner walls and middle-aisle blocks
             if ((i == 0 || j == 0 || i == size - 1 || j == size - 1)
                 || (i % 2 == 0 && j % 2 == 0)) {
-                level[i][j] = 'W';
+                level[i][j] = ObjectType::WALL;
             }
     
             /* Doesn't seem much random
@@ -79,7 +79,7 @@ void Level::generate () {
         position.y = rand() % size;
         
         if (!level[(uint) position.x][(uint) position.y]) {
-            level[(uint) position.x][(uint) position.y] = 'P';
+            level[(uint) position.x][(uint) position.y] = ObjectType::PLAYER;
             objects.player.number++;
         }
     }
@@ -93,7 +93,7 @@ void Level::generate () {
         position.y = rand() % (size - 2) + 1;
         
         if (canSpawn(position, radius)) {
-            level[(uint) position.x][(uint) position.y] = 'E';
+            level[(uint) position.x][(uint) position.y] = ObjectType::ENEMY;
             objects.enemies.number++;
         }
     }
@@ -105,7 +105,7 @@ void Level::generate () {
         position.y = rand() % (size - 2) + 1;
         
         if (canSpawn(position, radius)) {
-            level[(uint) position.x][(uint) position.y] = 'B';
+            level[(uint) position.x][(uint) position.y] = ObjectType::BLOCK;
             objects.blocks.number++;
         }
     }
@@ -122,22 +122,28 @@ void Level::create (Scene &scene) {
     for (uint i = 0; i < size; i++) {
         for (uint j = 0; j < size; j++) {
             vec3 position = {i * 2, 2, j * 2};
-            if (level[i][j] == 'W') {
-                auto wall = make_unique<Block>(position, "wall");
-                scene.objects.push_back(move(wall));
-            }
-            else if (level[i][j] == 'B') {
-                auto block = make_unique<Block>(position, "block");
-                scene.objects.push_back(move(block));
-                this->blockCount++;
-            }
-            else if (level[i][j] == 'P') {
-                auto player = make_unique<Player>(position);
-                scene.objects.push_back(move(player));
-            }
-            else if (level[i][j] == 'E') {
-                auto enemy = make_unique<Enemy>(position);
-                scene.objects.push_back(move(enemy));
+            switch (level[i][j]) {
+                case ObjectType::WALL: {
+                    auto wall = make_unique<Block>(position, "wall");
+                    scene.objects.push_back(move(wall));
+                    break;
+                }
+                case ObjectType::BLOCK: {
+                    auto block = make_unique<Block>(position, "block");
+                    scene.objects.push_back(move(block));
+                    this->blockCount++;
+                    break;
+                }
+                case ObjectType::PLAYER: {
+                    auto player = make_unique<Player>(position);
+                    scene.objects.push_back(move(player));
+                    break;
+                }
+                case ObjectType::ENEMY: {
+                    auto enemy = make_unique<Enemy>(position);
+                    scene.objects.push_back(move(enemy));
+                    break;
+                }
             }
         }
     }
@@ -174,8 +180,8 @@ bool Level::canSpawn (vec2 position, int radius) {
                 
                 // if player or enemy is in radius
                 if (
-                    level[(uint) i][(uint) j] == 'P' ||
-                    level[(uint) i][(uint) j] == 'E'
+                    level[(uint) i][(uint) j] == ObjectType::PLAYER ||
+                    level[(uint) i][(uint) j] == ObjectType::ENEMY
                     ) {
                     suitablePos = false;
                 }
