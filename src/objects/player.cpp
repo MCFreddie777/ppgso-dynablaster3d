@@ -2,12 +2,14 @@
 // Created by František Gič on 30/11/2019.
 //
 
+#include <thread>
+#include <chrono>
 #include "src/common/scene.h"
+#include "src/common/scenewindow.h"
 #include "player.h"
 #include "enemy.h"
 #include "bomb.h"
 #include "fire.h"
-#include "powerup.h"
 
 using namespace std;
 using namespace glm;
@@ -36,6 +38,8 @@ bool Player::update (Scene &scene, float dt) {
     // End of the game, pljeer is ded. NOOOOOOOOOOOO! Hulk sad.
     if (dynamic_cast<Enemy *>(obj) || dynamic_cast<Fire *>(obj)) {
         dynamic_cast<Game &>(scene).animate = false;
+        this_thread::sleep_for(chrono::seconds(2));
+        scene.windowRef->openMenu();
         return false;
     }
     

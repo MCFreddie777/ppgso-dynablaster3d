@@ -79,12 +79,12 @@ void Menu::update (float time) {
     Scene::update(time);
 }
 
-void Menu::handleKey (int key, int action, SceneWindow *window) {
+void Menu::handleKey (int key, int action) {
     if (action == GLFW_PRESS) {
         switch (key) {
             case (GLFW_KEY_ENTER): {
                 if (this->cursor->position.y == 13.5f) {
-                    window->startGame();
+                    this->windowRef->startGame();
                 }
                 else {
                     exit(0);
@@ -99,6 +99,8 @@ void Menu::handleKey (int key, int action, SceneWindow *window) {
                 this->cursor->position.y = 9.0f;
                 break;
             }
+            default:
+                break;
         }
     }
 }

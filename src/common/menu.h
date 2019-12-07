@@ -38,7 +38,7 @@ public:
     
     void update (float time) override;
     
-    void handleKey (int key, int action, SceneWindow *window) override;
+    void handleKey (int key, int action) override;
 };
 
 

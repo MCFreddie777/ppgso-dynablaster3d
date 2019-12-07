@@ -3,7 +3,7 @@
 //
 
 #include "game.h"
-
+#include "scenewindow.h"
 
 void Game::init () {
     
@@ -33,19 +33,19 @@ void Game::update (float time) {
     Scene::update(time);
 }
 
-void Game::handleKey (int key, int action, SceneWindow *window) {
+void Game::handleKey (int key, int action) {
     if (action == GLFW_PRESS) {
         switch (key) {
             
             //Exit to the menu
             case (GLFW_KEY_ESCAPE): {
-                window->openMenu();
+                this->windowRef->openMenu();
                 break;
             }
                 
                 // Restart
             case (GLFW_KEY_R): {
-                window->startGame();
+                this->windowRef->startGame();
                 break;
             }
                 // Pause
@@ -59,6 +59,8 @@ void Game::handleKey (int key, int action, SceneWindow *window) {
                 this->camera->switchView();
                 break;
             }
+            default:
+                break;
         }
     }
     

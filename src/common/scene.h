@@ -19,6 +19,7 @@ class SceneWindow;
 
 class Scene {
 public:
+    SceneWindow *windowRef;
     
     virtual void update (float time);
     
@@ -50,7 +51,7 @@ public:
         bool left, right;
     } cursor;
     
-    virtual void handleKey (int key, int action, SceneWindow *window);
+    virtual void handleKey (int key, int action);
 };
 
 

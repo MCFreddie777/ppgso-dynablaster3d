@@ -7,7 +7,6 @@
 #define DYNABLASTER3D_GAME_H
 
 #include "scene.h"
-#include "scenewindow.h"
 
 class Player;
 
@@ -26,7 +25,7 @@ public:
     
     void update (float time) override;
     
-    void handleKey (int key, int action, SceneWindow *window) override;
+    void handleKey (int key, int action) override;
     
 };
 

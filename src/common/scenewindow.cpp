@@ -19,6 +19,7 @@ void SceneWindow::initScene (T *currentScene) {
     currentScene->camera = move(camera);
     
     this->scene = currentScene;
+    this->scene->windowRef = this;
 }
 
 SceneWindow::SceneWindow () : Window{"DYNABlaster3D", SIZE, SIZE} {
@@ -40,7 +41,7 @@ SceneWindow::SceneWindow () : Window{"DYNABlaster3D", SIZE, SIZE} {
 
 void SceneWindow::onKey (int key, int scanCode, int action, int mods) {
     scene->keyboard[key] = action;
-    scene->handleKey(key, action, this);
+    scene->handleKey(key, action);
 }
 
 
@@ -65,7 +66,6 @@ void SceneWindow::onIdle () {
 }
 
 void SceneWindow::openMenu () {
-    std::cout << "init\n";
     initScene(this->menu);
 }
 
