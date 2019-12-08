@@ -60,7 +60,7 @@ void Game::handleKey (int key, int action) {
                 
                 // Switch camera view
             case (GLFW_KEY_C): {
-                this->camera->switchView();
+                this->camera->switchView(this);
                 break;
             }
             default:

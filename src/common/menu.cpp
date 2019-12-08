@@ -66,7 +66,7 @@ void Menu::init () {
     );
     auto
         cursor = make_unique<Menu::MenuObject>(
-        vec3{14, 13.5f, 0},
+        vec3{14, 13.0f, 0},
         "red",
         "cursor"
     );
@@ -83,7 +83,7 @@ void Menu::handleKey (int key, int action) {
     if (action == GLFW_PRESS) {
         switch (key) {
             case (GLFW_KEY_ENTER): {
-                if (this->cursor->position.y == 13.5f) {
+                if (this->cursor->position.y == 13.0f) {
                     this->windowRef->startGame();
                 }
                 else {
@@ -92,11 +92,11 @@ void Menu::handleKey (int key, int action) {
                 break;
             }
             case (GLFW_KEY_W): {
-                this->cursor->position.y = 13.5f;
+                this->cursor->position.y = 13.0f;
                 break;
             }
             case (GLFW_KEY_S): {
-                this->cursor->position.y = 9.0f;
+                this->cursor->position.y = 8.75f;
                 break;
             }
             default:

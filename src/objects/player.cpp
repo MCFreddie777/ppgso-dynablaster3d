@@ -74,22 +74,86 @@ void Player::handleMovement (
     if (delay > 0.25f) {
         delay = 0;
     
-        if (keyboard[GLFW_KEY_W] && complexPosition.move.up) {
-            position.z += 2;
-            rotation.z = 0;
+        if (
+            (
+                keyboard[GLFW_KEY_W] || keyboard[GLFW_KEY_A] ||
+                keyboard[GLFW_KEY_S] || keyboard[GLFW_KEY_D]
+            )
+            ) {
+            if (scene.camera->isFirstPersonMode()) {
+                if (keyboard[GLFW_KEY_W] && Movement::canMove(complexPosition)) {
+                    switch (direction) {
+                        case 0: {
+                            if (complexPosition.move.up)
+                                position.z += 2;
+                            break;
+                        }
+                        case 1: {
+                            if (complexPosition.move.right)
+                                position.x -= 2;
+                            break;
+                        }
+                        case 2: {
+                            if (complexPosition.move.down)
+                                position.z -= 2;
+                            break;
+                        }
+                        case 3: {
+                            if (complexPosition.move.left)
+                                position.x += 2;
+                            break;
+                        }
+                    }
+                }
+                if (keyboard[GLFW_KEY_S]) {
+                    rotation.z += PI;
+                    if (direction == 0 || direction == 1)
+                        direction += 2;
+                    else direction -= 2;
+                
+                }
+                if (keyboard[GLFW_KEY_A]) {
+                    rotation.z += PI / 2;
+                
+                    if (direction != 0)
+                        direction -= 1;
+                    else direction = 3;
+                
+                }
+                if (keyboard[GLFW_KEY_D]) {
+                    rotation.z -= PI / 2;
+                
+                    if (direction != 3)
+                        direction += 1;
+                    else direction = 0;
+                
+                }
+                scene.camera->updateWithDirection(position, direction);
+            }
+            else if (Movement::canMove(complexPosition)) {
+                if (keyboard[GLFW_KEY_W] && complexPosition.move.up) {
+                    position.z += 2;
+                    direction = 0;
+                    rotation.z = 0;
+                }
+                if (keyboard[GLFW_KEY_S] && complexPosition.move.down) {
+                    position.z -= 2;
+                    direction = 2;
+                    rotation.z = -PI;
+                }
+                if (keyboard[GLFW_KEY_A] && complexPosition.move.left) {
+                    position.x += 2;
+                    direction = 3;
+                    rotation.z = PI / 2.0f;
+                }
+                if (keyboard[GLFW_KEY_D] && complexPosition.move.right) {
+                    position.x -= 2;
+                    direction = 1;
+                    rotation.z = -PI / 2.0f;
+                }
+            }
         }
-        if (keyboard[GLFW_KEY_S] && complexPosition.move.down) {
-            position.z -= 2;
-            rotation.z = -PI;
-        }
-        if (keyboard[GLFW_KEY_A] && complexPosition.move.left) {
-            position.x += 2;
-            rotation.z = PI / 2.0f;
-        }
-        if (keyboard[GLFW_KEY_D] && complexPosition.move.right) {
-            position.x -= 2;
-            rotation.z = -PI / 2.0f;
-        }
+        
         if (keyboard[GLFW_KEY_SPACE]) {
             if (this->bombs.number != this->bombs.max) {
                 auto bomb = make_unique<Bomb>(position, *this);
@@ -98,6 +162,7 @@ void Player::handleMovement (
             }
         }
     }
+    
 }
 
 

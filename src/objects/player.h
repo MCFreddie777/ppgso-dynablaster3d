@@ -44,6 +44,8 @@ private:
 
 public:
     
+    short direction = 0;
+    
     BombInfo bombs = BombInfo(1u);
     
     explicit Player (vec3 position);

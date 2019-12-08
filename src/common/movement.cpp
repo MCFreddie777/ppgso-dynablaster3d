@@ -123,3 +123,6 @@ template ComplexPosition Movement::getPossibleMove<Player> (Game &scene, Player 
 
 template ComplexPosition Movement::getPossibleMove<Enemy> (Game &scene, Enemy *enemy);
 
+bool Movement::canMove (ComplexPosition position) {
+    return (position.move.up + position.move.down + position.move.left + position.move.right) > 0;
+}

@@ -33,6 +33,8 @@ public:
     
     template<typename T>
     static ComplexPosition getPossibleMove (Game &scene, T *object);
+    
+    static bool canMove (ComplexPosition position);
 };
 
 #endif //DYNABLASTER3D_MOVEMENT_H
