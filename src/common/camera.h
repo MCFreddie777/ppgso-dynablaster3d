@@ -21,6 +21,7 @@ class Camera {
 private:
     
     vec3 globalUp = vec3{0, 1, 0};
+    float yaw = 0;
     
     uint view = 0;
     vector<View> views = {
@@ -39,7 +40,7 @@ private:
     View current = {
         globalUp,
         {0, 0, 0},
-        {0, 0, 0}
+        {0, 0, 0},
     };
 
 public:

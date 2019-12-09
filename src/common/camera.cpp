@@ -76,33 +76,26 @@ void Camera::handleKey (int key) {
         float speed = 0.5f;
         
         if (key == GLFW_KEY_BACKSLASH) {
-            current.position += speed * current.center;
+            current.position -= (current.center - current.position) * (speed / 2);
         }
         if (key == GLFW_KEY_RIGHT_BRACKET) {
-            current.position -= speed * current.center;
-            
+            current.position += (current.center - current.position) * (speed / 2);
         }
         
         if (key == GLFW_KEY_UP) {
-//            current.center -= speed;
-    
-            // TODO: tilt up
-            // TODO: tilt up
+            current.center.y += speed;
         }
         
         if (key == GLFW_KEY_DOWN) {
-//            current.back += speed * current.position;
-            // TODO: tilt up
+            current.center.y -= speed;
         }
         
         if (key == GLFW_KEY_LEFT) {
-            // TODO: instead of move left, tilt left
-//            current.position += normalize(cross(current.back, current.up)) * speed;
+            current.center.x += speed;
         }
         
         if (key == GLFW_KEY_RIGHT) {
-            // TODO: instead of move right, tilt right
-//            current.position -= normalize(cross(current.back, current.up)) * speed;
+            current.center.x -= speed;
         }
         this->update();
     }
