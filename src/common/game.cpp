@@ -46,7 +46,7 @@ void Game::handleKey (int key, int action) {
                 this->windowRef->openMenu();
                 break;
             }
-                
+        
                 // Restart
             case (GLFW_KEY_R): {
                 this->windowRef->startGame();
@@ -57,7 +57,6 @@ void Game::handleKey (int key, int action) {
                 this->animate = !this->animate;
                 break;
             }
-                
                 // Switch camera view
             case (GLFW_KEY_C): {
                 this->camera->switchView(this);
@@ -66,6 +65,14 @@ void Game::handleKey (int key, int action) {
             default:
                 break;
         }
+    }
+    
+        // Move the sun ( "Give me an axis and I will move the sun" ~ArchimedesFero )
+    else if (key == GLFW_KEY_B) {
+        this->lightDirection.x -= 0.4f;
+    }
+    else if (key == GLFW_KEY_N) {
+        this->lightDirection.x += 0.4f;
     }
     
     // Handle camera

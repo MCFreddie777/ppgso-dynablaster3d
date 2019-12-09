@@ -39,10 +39,10 @@ public:
     std::map<int, int> keyboard;
     
     // Lights, in this case using only simple directional diffuse lighting
-    glm::vec3 lightDirection{-1.0f, 5.0f, -1.0f};
-    glm::vec3 lightDirection2{-1.0f, 2.0f, -1.0f};
-    glm::vec3 lightColor{1.0f, 1.0f, 1.0f};
-    glm::vec3 lightColor2{0, 1, 1};
+    glm::vec3 lightDirection{1.0f};
+    glm::vec3 lightDirection2{1.0f};
+    glm::vec3 lightColor{1.0f};
+    glm::vec3 lightColor2{1.0f};
     
     
     // Store cursor state
@@ -52,6 +52,8 @@ public:
     } cursor;
     
     virtual void handleKey (int key, int action);
+    
+    void lightReset ();
 };
 
 

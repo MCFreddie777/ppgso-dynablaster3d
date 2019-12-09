@@ -6,6 +6,7 @@
 
 void Scene::init () {
     this->objects.clear();
+    this->lightReset();
 }
 
 void Scene::update (float time) {
@@ -61,6 +62,13 @@ std::vector<Object *> Scene::intersect (const glm::vec3 &position, const glm::ve
     }
     
     return intersected;
+}
+
+void Scene::lightReset () {
+    this->lightDirection = vec3{-1.0f, 5.0f, -1.0f};
+    this->lightDirection2 = vec3{-1.0f, 2.0f, -1.0f};
+    this->lightColor = vec3{1.0f, 1.0f, 1.0f};
+    this->lightColor2 = vec3{0, 1, 1};
 }
 
 void Scene::handleKey (int key, int action) {};
