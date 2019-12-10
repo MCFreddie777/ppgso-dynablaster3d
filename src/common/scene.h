@@ -11,9 +11,9 @@
 #include <map>
 #include <list>
 
-#include "src/objects/object.h"
-#include "src/common/camera.h"
-#include "src/common/level.h"
+#include "../objects/object.h"
+#include "../common/camera.h"
+#include "../common/level.h"
 
 class SceneWindow;
 

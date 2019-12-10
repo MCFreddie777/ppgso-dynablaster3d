@@ -13,7 +13,7 @@
 #pragma once
 
 // Dependency:
-#include "bin/dependencies/include/glm/glm.hpp"
+#include "../glm.hpp"
 
 #if(GLM_ARCH != GLM_ARCH_PURE)
 

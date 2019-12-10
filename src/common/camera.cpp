@@ -2,7 +2,7 @@
 
 #include "camera.h"
 #include "game.h"
-#include "src/objects/player.h"
+#include "../objects/player.h"
 
 using namespace std;
 using namespace glm;

@@ -1,4 +1,4 @@
-//
+ //
 // Created by František Gič on 07/12/2019.
 //
 
@@ -25,10 +25,10 @@ Menu::MenuObject::MenuObject (
     
     if (!texture)
         texture = make_unique<Texture>(
-            image::loadBMP("../resources/textures/" + texturePath + ".bmp")
+            image::loadBMP("textures/"+ texturePath + ".bmp")
         );
     
-    if (!mesh) mesh = make_unique<Mesh>("../resources/objects/" + meshPath + ".obj");
+    if (!mesh) mesh = make_unique<Mesh>("objects/" + meshPath + ".obj");
     
 }
 

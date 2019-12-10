@@ -3,4 +3,4 @@
 
 #pragma once
 
-#include "bin/dependencies/include/glm/detail/type_vec4.hpp"
+#include "detail/type_vec4.hpp"

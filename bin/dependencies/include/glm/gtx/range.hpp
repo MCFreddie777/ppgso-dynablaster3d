@@ -13,14 +13,14 @@
 #pragma once
 
 // Dependencies
-#include "bin/dependencies/include/glm/detail/setup.hpp"
+#include "../detail/setup.hpp"
 
 #if !GLM_HAS_RANGE_FOR
 #	error "GLM_GTX_range requires C++11 suppport or 'range for'"
 #endif
 
-#include "bin/dependencies/include/glm/gtc/type_ptr.hpp"
-#include "bin/dependencies/include/glm/gtc/vec1.hpp"
+#include "../gtc/type_ptr.hpp"
+#include "../gtc/vec1.hpp"
 
 namespace glm
 {

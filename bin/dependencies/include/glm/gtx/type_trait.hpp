@@ -13,20 +13,20 @@
 #pragma once
 
 // Dependency:
-#include "bin/dependencies/include/glm/detail/type_vec2.hpp"
-#include "bin/dependencies/include/glm/detail/type_vec3.hpp"
-#include "bin/dependencies/include/glm/detail/type_vec4.hpp"
-#include "bin/dependencies/include/glm/detail/type_mat2x2.hpp"
-#include "bin/dependencies/include/glm/detail/type_mat2x3.hpp"
-#include "bin/dependencies/include/glm/detail/type_mat2x4.hpp"
-#include "bin/dependencies/include/glm/detail/type_mat3x2.hpp"
-#include "bin/dependencies/include/glm/detail/type_mat3x3.hpp"
-#include "bin/dependencies/include/glm/detail/type_mat3x4.hpp"
-#include "bin/dependencies/include/glm/detail/type_mat4x2.hpp"
-#include "bin/dependencies/include/glm/detail/type_mat4x3.hpp"
-#include "bin/dependencies/include/glm/detail/type_mat4x4.hpp"
-#include "bin/dependencies/include/glm/gtc/quaternion.hpp"
-#include "dual_quaternion.hpp"
+#include "../detail/type_vec2.hpp"
+#include "../detail/type_vec3.hpp"
+#include "../detail/type_vec4.hpp"
+#include "../detail/type_mat2x2.hpp"
+#include "../detail/type_mat2x3.hpp"
+#include "../detail/type_mat2x4.hpp"
+#include "../detail/type_mat3x2.hpp"
+#include "../detail/type_mat3x3.hpp"
+#include "../detail/type_mat3x4.hpp"
+#include "../detail/type_mat4x2.hpp"
+#include "../detail/type_mat4x3.hpp"
+#include "../detail/type_mat4x4.hpp"
+#include "../gtc/quaternion.hpp"
+#include "../gtx/dual_quaternion.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_type_trait extension included")

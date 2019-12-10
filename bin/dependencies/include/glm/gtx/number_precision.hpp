@@ -15,8 +15,8 @@
 #pragma once
 
 // Dependency:
-#include "bin/dependencies/include/glm/glm.hpp"
-#include "bin/dependencies/include/glm/gtc/type_precision.hpp"
+#include "../glm.hpp"
+#include "../gtc/type_precision.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_number_precision extension included")

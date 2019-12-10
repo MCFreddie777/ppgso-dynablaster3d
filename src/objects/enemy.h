@@ -6,8 +6,8 @@
 #ifndef DYNABLASTER3D_ENEMY_H
 #define DYNABLASTER3D_ENEMY_H
 
-#include "src/common/scene.h"
-#include "src/common/movement.h"
+#include "../common/scene.h"
+#include "../common/movement.h"
 #include "object.h"
 
 class Enemy final : public Object {

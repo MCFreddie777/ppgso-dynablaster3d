@@ -2,7 +2,7 @@
 /// @file glm/gtc/matrix_transform_2d.inl
 /// @author Miguel Ángel Pérez Martínez
 
-#include "bin/dependencies/include/glm/trigonometric.hpp"
+#include "../trigonometric.hpp"
 
 namespace glm
 {

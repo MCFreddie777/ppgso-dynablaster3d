@@ -4,8 +4,8 @@
 
 #include <thread>
 #include <chrono>
-#include "src/common/scene.h"
-#include "src/common/scenewindow.h"
+#include "../common/scene.h"
+#include "../common/scenewindow.h"
 #include "player.h"
 #include "enemy.h"
 #include "bomb.h"
@@ -25,8 +25,8 @@ Player::Player (vec3 position) {
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
     if (!texture)
-        texture = make_unique<Texture>(image::loadBMP("../resources/textures/player.bmp"));
-    if (!mesh) mesh = make_unique<Mesh>("../resources/objects/player.obj");
+        texture = make_unique<Texture>(image::loadBMP("textures/player.bmp"));
+    if (!mesh) mesh = make_unique<Mesh>("objects/player.obj");
 }
 
 bool Player::update (Scene &scene, float dt) {

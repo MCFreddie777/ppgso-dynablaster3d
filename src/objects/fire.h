@@ -6,7 +6,7 @@
 #ifndef DYNABLASTER3D_FIRE_H
 #define DYNABLASTER3D_FIRE_H
 
-#include "src/common/scene.h"
+#include "../common/scene.h"
 #include "object.h"
 
 

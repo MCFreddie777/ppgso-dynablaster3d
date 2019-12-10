@@ -13,12 +13,12 @@
 #pragma once
 
 // Dependencies
-#include "bin/dependencies/include/glm/mat4x4.hpp"
-#include "bin/dependencies/include/glm/vec3.hpp"
-#include "bin/dependencies/include/glm/vec4.hpp"
-#include "bin/dependencies/include/glm/geometric.hpp"
-#include "bin/dependencies/include/glm/gtc/quaternion.hpp"
-#include "bin/dependencies/include/glm/gtc/matrix_transform.hpp"
+#include "../mat4x4.hpp"
+#include "../vec3.hpp"
+#include "../vec4.hpp"
+#include "../geometric.hpp"
+#include "../gtc/quaternion.hpp"
+#include "../gtc/matrix_transform.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_matrix_decompose extension included")

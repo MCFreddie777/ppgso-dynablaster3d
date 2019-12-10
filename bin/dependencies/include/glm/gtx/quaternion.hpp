@@ -14,10 +14,10 @@
 #pragma once
 
 // Dependency:
-#include "bin/dependencies/include/glm/glm.hpp"
-#include "bin/dependencies/include/glm/gtc/constants.hpp"
-#include "bin/dependencies/include/glm/gtc/quaternion.hpp"
-#include "norm.hpp"
+#include "../glm.hpp"
+#include "../gtc/constants.hpp"
+#include "../gtc/quaternion.hpp"
+#include "../gtx/norm.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_quaternion extension included")

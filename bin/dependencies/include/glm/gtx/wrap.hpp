@@ -13,8 +13,8 @@
 #pragma once
 
 // Dependency:
-#include "bin/dependencies/include/glm/glm.hpp"
-#include "bin/dependencies/include/glm/gtc/vec1.hpp"
+#include "../glm.hpp"
+#include "../gtc/vec1.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_wrap extension included")

@@ -7,7 +7,7 @@
 #ifndef DYNABLASTER3D_POWERUP_H
 #define DYNABLASTER3D_POWERUP_H
 
-#include "src/common/scene.h"
+#include "../common/scene.h"
 #include "object.h"
 
 using namespace ppgso;

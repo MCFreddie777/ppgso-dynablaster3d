@@ -1,9 +1,9 @@
 /// @ref gtc_quaternion
 /// @file glm/gtc/quaternion.inl
 
-#include "bin/dependencies/include/glm/trigonometric.hpp"
-#include "bin/dependencies/include/glm/geometric.hpp"
-#include "bin/dependencies/include/glm/exponential.hpp"
+#include "../trigonometric.hpp"
+#include "../geometric.hpp"
+#include "../exponential.hpp"
 #include <limits>
 
 namespace glm{

@@ -1,7 +1,7 @@
 /// @ref core
 /// @file glm/detail/func_integer_simd.inl
 
-#include "bin/dependencies/include/glm/simd/integer.h"
+#include "../simd/integer.h"
 
 #if GLM_ARCH & GLM_ARCH_SSE2_BIT
 

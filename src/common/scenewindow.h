@@ -10,9 +10,9 @@
 #include <iostream>
 #include <list>
 #include <bin/ppgso/lib/ppgso.h>
-#include <GLUT/glut.h>
+#include <GL/glew.h>
 
-#include "src/common/scene.h"
+#include "../common/scene.h"
 
 class Menu;
 

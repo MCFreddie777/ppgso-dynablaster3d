@@ -16,15 +16,15 @@
 #pragma once
 
 // Dependencies
-#include "bin/dependencies/include/glm/detail/setup.hpp"
-#include "bin/dependencies/include/glm/detail/precision.hpp"
-#include "bin/dependencies/include/glm/detail/_noise.hpp"
-#include "bin/dependencies/include/glm/geometric.hpp"
-#include "bin/dependencies/include/glm/common.hpp"
-#include "bin/dependencies/include/glm/vector_relational.hpp"
-#include "bin/dependencies/include/glm/vec2.hpp"
-#include "bin/dependencies/include/glm/vec3.hpp"
-#include "bin/dependencies/include/glm/vec4.hpp"
+#include "../detail/setup.hpp"
+#include "../detail/precision.hpp"
+#include "../detail/_noise.hpp"
+#include "../geometric.hpp"
+#include "../common.hpp"
+#include "../vector_relational.hpp"
+#include "../vec2.hpp"
+#include "../vec3.hpp"
+#include "../vec4.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTC_noise extension included")

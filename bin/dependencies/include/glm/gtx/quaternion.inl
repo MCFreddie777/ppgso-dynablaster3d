@@ -2,7 +2,7 @@
 /// @file glm/gtx/quaternion.inl
 
 #include <limits>
-#include "bin/dependencies/include/glm/gtc/constants.hpp"
+#include "../gtc/constants.hpp"
 
 namespace glm
 {

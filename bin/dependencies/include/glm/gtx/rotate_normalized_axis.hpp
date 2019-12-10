@@ -15,9 +15,9 @@
 #pragma once
 
 // Dependency:
-#include "bin/dependencies/include/glm/glm.hpp"
-#include "bin/dependencies/include/glm/gtc/epsilon.hpp"
-#include "bin/dependencies/include/glm/gtc/quaternion.hpp"
+#include "../glm.hpp"
+#include "../gtc/epsilon.hpp"
+#include "../gtc/quaternion.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_rotate_normalized_axis extension included")

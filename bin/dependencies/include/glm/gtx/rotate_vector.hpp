@@ -14,8 +14,8 @@
 #pragma once
 
 // Dependency:
-#include "bin/dependencies/include/glm/glm.hpp"
-#include "transform.hpp"
+#include "../glm.hpp"
+#include "../gtx/transform.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_rotate_vector extension included")

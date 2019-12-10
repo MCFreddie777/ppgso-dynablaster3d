@@ -4,9 +4,9 @@
 
 #include "scenewindow.h"
 
-#include "src/common/camera.h"
-#include "src/common/game.h"
-#include "src/common/menu.h"
+#include "../common/camera.h"
+#include "../common/game.h"
+#include "../common/menu.h"
 
 const unsigned int SIZE = 1024;
 

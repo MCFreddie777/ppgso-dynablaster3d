@@ -6,7 +6,7 @@
 #include <shaders/diffuse_frag_glsl.h>
 
 #include "block.h"
-#include "src/common/movement.h"
+#include "../common/movement.h"
 #include "fire.h"
 
 using namespace std;
@@ -22,9 +22,8 @@ Block::Block (vec3 position, const string texturePath, const string meshPath) {
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
     if (!texture)
-        texture = make_unique<Texture>(image::loadBMP("../resources/textures/" + texturePath + ""
-                                                                                               ".bmp"));
-    if (!mesh) mesh = make_unique<Mesh>("../resources/objects/" + meshPath + ".obj");
+        texture = make_unique<Texture>(image::loadBMP("textures/" + texturePath + ".bmp"));
+    if (!mesh) mesh = make_unique<Mesh>("objects/" + meshPath + ".obj");
 }
 
 bool Block::update (Scene &scene, float dt) {

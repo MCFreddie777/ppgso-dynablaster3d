@@ -14,9 +14,9 @@
 #pragma once
 
 // Dependencies
-#include "bin/dependencies/include/glm/detail/setup.hpp"
-#include "bin/dependencies/include/glm/detail/precision.hpp"
-#include "bin/dependencies/include/glm/detail/type_int.hpp"
+#include "../detail/setup.hpp"
+#include "../detail/precision.hpp"
+#include "../detail/type_int.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTC_ulp extension included")

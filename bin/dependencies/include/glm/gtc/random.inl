@@ -1,8 +1,8 @@
 /// @ref gtc_random
 /// @file glm/gtc/random.inl
 
-#include "bin/dependencies/include/glm/geometric.hpp"
-#include "bin/dependencies/include/glm/exponential.hpp"
+#include "../geometric.hpp"
+#include "../exponential.hpp"
 #include <cstdlib>
 #include <ctime>
 #include <cassert>

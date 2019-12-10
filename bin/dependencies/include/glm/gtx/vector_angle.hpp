@@ -15,10 +15,10 @@
 #pragma once
 
 // Dependency:
-#include "bin/dependencies/include/glm/glm.hpp"
-#include "bin/dependencies/include/glm/gtc/epsilon.hpp"
-#include "quaternion.hpp"
-#include "rotate_vector.hpp"
+#include "../glm.hpp"
+#include "../gtc/epsilon.hpp"
+#include "../gtx/quaternion.hpp"
+#include "../gtx/rotate_vector.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_vector_angle extension included")

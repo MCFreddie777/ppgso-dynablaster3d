@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "bin/dependencies/include/glm/fwd.hpp"
+#include "../fwd.hpp"
 #include "type_vec2.hpp"
 #include "type_vec3.hpp"
 #include "type_mat.hpp"

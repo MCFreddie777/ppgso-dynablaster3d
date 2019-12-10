@@ -6,7 +6,7 @@
 #ifndef DYNABLASTER3D_BOMB_H
 #define DYNABLASTER3D_BOMB_H
 
-#include "src/common/game.h"
+#include "../common/game.h"
 #include "object.h"
 
 class Player;

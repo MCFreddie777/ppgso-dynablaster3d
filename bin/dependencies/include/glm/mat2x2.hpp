@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "bin/dependencies/include/glm/detail/type_mat2x2.hpp"
+#include "detail/type_mat2x2.hpp"
 
 namespace glm
 {

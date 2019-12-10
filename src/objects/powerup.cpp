@@ -6,7 +6,7 @@
 #include <shaders/diffuse_frag_glsl.h>
 
 #include "powerup.h"
-#include "src/common/movement.h"
+#include "../common/movement.h"
 #include "player.h"
 #include "fire.h"
 
@@ -25,9 +25,9 @@ PowerUp::PowerUp (vec3 position) {
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
     if (!texture)
         texture = make_unique<Texture>(
-            image::loadBMP("../resources/textures/powerup_" + type + ".bmp")
+            image::loadBMP("textures/powerup_" + type + ".bmp")
         );
-    if (!mesh) mesh = make_unique<Mesh>("../resources/objects/powerup.obj");
+    if (!mesh) mesh = make_unique<Mesh>("objects/powerup.obj");
 }
 
 bool PowerUp::update (Scene &scene, float dt) {

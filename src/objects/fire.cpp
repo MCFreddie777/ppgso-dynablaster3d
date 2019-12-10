@@ -4,7 +4,7 @@
 
 #include <shaders/diffuse_vert_glsl.h>
 #include <shaders/diffuse_frag_glsl.h>
-#include <src/common/movement.h>
+#include "../common/movement.h"
 
 #include "fire.h"
 #include "block.h"
@@ -24,9 +24,9 @@ Fire::Fire (vec3 position, float rotation) {
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
     if (!texture)
-        texture = make_unique<Texture>(image::loadBMP("../resources/textures/fire.bmp"));
+        texture = make_unique<Texture>(image::loadBMP("textures/fire.bmp"));
     if (!mesh)
-        mesh = make_unique<Mesh>("../resources/objects/fire.obj");
+        mesh = make_unique<Mesh>("objects/fire.obj");
 }
 
 bool Fire::update (Scene &scene, float dt) {

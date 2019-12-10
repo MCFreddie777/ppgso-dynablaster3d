@@ -3,7 +3,7 @@
 
 #include "func_common.hpp"
 #include "type_half.hpp"
-#include "bin/dependencies/include/glm/fwd.hpp"
+#include "../fwd.hpp"
 
 namespace glm
 {

@@ -5,28 +5,28 @@
 #include <cstdlib>
 #include <cmath>
 #include "level.h"
-#include "src/objects/block.h"
-#include "src/objects/player.h"
-#include "src/objects/enemy.h"
-#include "src/objects/powerup.h"
+#include "../objects/block.h"
+#include "../objects/player.h"
+#include "../objects/enemy.h"
+#include "../objects/powerup.h"
 
 using namespace std;
 
 Level::Level (uint size) {
     this->size = size;
     
-    this->objects = {
-        .blocks =  {
-            .maxNumber = (int) ((size * size) * 0.17),
-            .number = 0,
+    this->objects =  {
+        {
+            (int) round(size / 3),
+            0,
         },
-        .enemies =  {
-            .maxNumber = (int) round(size / 3),
-            .number = 0,
+        {
+            1,
+            0,
         },
-        .player =  {
-            .maxNumber = 1,
-            .number = 0,
+        {
+            (int) ((size * size) * 0.17),
+            0,
         },
     };
     

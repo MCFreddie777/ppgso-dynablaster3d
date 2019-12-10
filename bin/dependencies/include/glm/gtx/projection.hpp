@@ -13,7 +13,7 @@
 #pragma once
 
 // Dependency:
-#include "bin/dependencies/include/glm/geometric.hpp"
+#include "../geometric.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_projection extension included")

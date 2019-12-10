@@ -14,8 +14,8 @@
 #pragma once
 
 // Dependency:
-#include "bin/dependencies/include/glm/glm.hpp"
-#include "vector_query.hpp"
+#include "../glm.hpp"
+#include "../gtx/vector_query.hpp"
 #include <limits>
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)

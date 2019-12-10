@@ -14,7 +14,7 @@ namespace ppgso {
       unsigned int bfSize;        /* Size of file */
       unsigned short bfReserved1; /* Reserved */
       unsigned short bfReserved2; /* ... */
-      unsigned int bfOffBits;     /* Offset to bitmap resources */
+      unsigned int bfOffBits;     /* Offset to bitmap data */
     } BITMAPFILEHEADER;
 
     typedef struct /**** BMP file info structure ****/
@@ -25,7 +25,7 @@ namespace ppgso {
       unsigned short biPlanes;     /* Number of color planes */
       unsigned short biBitCount;   /* Number of bits per pixel */
       unsigned int biCompression;  /* Type of compression to use */
-      unsigned int biSizeImage;    /* Size of image resources */
+      unsigned int biSizeImage;    /* Size of image data */
       int biXPelsPerMeter;         /* X pixels per meter */
       int biYPelsPerMeter;         /* Y pixels per meter */
       unsigned int biClrUsed;      /* Number of colors used */
@@ -73,14 +73,14 @@ namespace ppgso {
 
       if (width == 0 || height == 0) {
         std::stringstream msg;
-        msg << "BMP file does not contain any resources. " << bmp;
+        msg << "BMP file does not contain any data. " << bmp;
         throw std::runtime_error(msg.str());
       }
 
       Image image{width, height};
       auto &framebuffer = image.getFramebuffer();
 
-      // Load resources
+      // Load data
       input_file.seekg(bmpFileHeader.bfOffBits, input_file.beg);
 
       // BMP uses padding for rows
@@ -142,7 +142,7 @@ namespace ppgso {
       output_file.write((char *) &bmpFileHeader, sizeof(BITMAPFILEHEADER));
       output_file.write((char *) &bmpInfoHeader, sizeof(BITMAPINFOHEADER));
 
-      // Prepare BRG output resources by swapping RGB to BRG and mirroring along height
+      // Prepare BRG output data by swapping RGB to BRG and mirroring along height
       output_file.seekp(bmpFileHeader.bfOffBits, output_file.beg);
 
       for (int j = 0; j < height; j++) {

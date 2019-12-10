@@ -1,9 +1,9 @@
 /// @ref gtc_matrix_transform
 /// @file glm/gtc/matrix_transform.inl
 
-#include "bin/dependencies/include/glm/geometric.hpp"
-#include "bin/dependencies/include/glm/trigonometric.hpp"
-#include "bin/dependencies/include/glm/matrix.hpp"
+#include "../geometric.hpp"
+#include "../trigonometric.hpp"
+#include "../matrix.hpp"
 
 namespace glm
 {

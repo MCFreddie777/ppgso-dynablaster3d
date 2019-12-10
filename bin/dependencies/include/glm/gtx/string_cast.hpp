@@ -17,10 +17,10 @@
 #pragma once
 
 // Dependency:
-#include "bin/dependencies/include/glm/glm.hpp"
-#include "bin/dependencies/include/glm/gtc/type_precision.hpp"
-#include "bin/dependencies/include/glm/gtc/quaternion.hpp"
-#include "dual_quaternion.hpp"
+#include "../glm.hpp"
+#include "../gtc/type_precision.hpp"
+#include "../gtc/quaternion.hpp"
+#include "../gtx/dual_quaternion.hpp"
 #include <string>
 
 #if(GLM_COMPILER & GLM_COMPILER_CUDA)

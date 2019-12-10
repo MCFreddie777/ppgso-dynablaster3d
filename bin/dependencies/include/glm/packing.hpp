@@ -3,4 +3,4 @@
 
 #pragma once
 
-#include "bin/dependencies/include/glm/detail/func_packing.hpp"
+#include "detail/func_packing.hpp"

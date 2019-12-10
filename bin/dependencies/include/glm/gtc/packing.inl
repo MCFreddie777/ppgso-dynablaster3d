@@ -1,11 +1,11 @@
 /// @ref gtc_packing
 /// @file glm/gtc/packing.inl
 
-#include "bin/dependencies/include/glm/common.hpp"
-#include "bin/dependencies/include/glm/vec2.hpp"
-#include "bin/dependencies/include/glm/vec3.hpp"
-#include "bin/dependencies/include/glm/vec4.hpp"
-#include "bin/dependencies/include/glm/detail/type_half.hpp"
+#include "../common.hpp"
+#include "../vec2.hpp"
+#include "../vec3.hpp"
+#include "../vec4.hpp"
+#include "../detail/type_half.hpp"
 #include <cstring>
 #include <limits>
 

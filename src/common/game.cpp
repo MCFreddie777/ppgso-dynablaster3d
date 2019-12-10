@@ -3,6 +3,7 @@
 //
 
 #include <thread>
+#include <stdlib.h>
 #include <chrono>
 #include "game.h"
 #include "scenewindow.h"
@@ -76,11 +77,8 @@ void Game::handleKey (int key, int action) {
     }
     
     // Handle camera
-    if (std::any_of(
-        begin(this->camera->controls),
-        end(this->camera->controls),
-        [&] (int i) { return i == key; }
-    )) {
+    if (std::find(std::begin(this->camera->controls), std::end(this->camera->controls), key) != std::end(this->camera->controls))
+  {
         this->camera->handleKey(key);
     }
 }

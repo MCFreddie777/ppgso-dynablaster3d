@@ -30,7 +30,7 @@ void ppgso::Texture::initGL() {
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
   glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 
-  // Update texture with resources from image framebuffer
+  // Update texture with data from image framebuffer
   update();
 }
 

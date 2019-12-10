@@ -21,8 +21,8 @@ Enemy::Enemy (vec3 position) {
     this->position = position;
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
-    if (!texture) texture = make_unique<Texture>(image::loadBMP("../resources/textures/enemy.bmp"));
-    if (!mesh) mesh = make_unique<Mesh>("../resources/objects/enemy.obj");
+    if (!texture) texture = make_unique<Texture>(image::loadBMP("textures/enemy.bmp"));
+    if (!mesh) mesh = make_unique<Mesh>("objects/enemy.obj");
 }
 
 bool Enemy::update (Scene &scene, float dt) {

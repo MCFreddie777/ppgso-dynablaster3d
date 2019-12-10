@@ -14,7 +14,7 @@
 #pragma once
 
 // Dependencies
-#include "bin/dependencies/include/glm/gtc/bitfield.hpp"
+#include "../gtc/bitfield.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTX_bit extension is deprecated, include GLM_GTC_bitfield and GLM_GTC_integer instead")

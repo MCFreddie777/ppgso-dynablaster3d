@@ -1,7 +1,7 @@
 /// @ref core
 /// @file glm/detail/func_matrix.inl
 
-#include "bin/dependencies/include/glm/geometric.hpp"
+#include "../geometric.hpp"
 #include <limits>
 
 namespace glm{

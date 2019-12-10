@@ -21,11 +21,11 @@
 #pragma once
 
 // Dependencies
-#include "bin/dependencies/include/glm/mat4x4.hpp"
-#include "bin/dependencies/include/glm/vec2.hpp"
-#include "bin/dependencies/include/glm/vec3.hpp"
-#include "bin/dependencies/include/glm/vec4.hpp"
-#include "constants.hpp"
+#include "../mat4x4.hpp"
+#include "../vec2.hpp"
+#include "../vec3.hpp"
+#include "../vec4.hpp"
+#include "../gtc/constants.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTC_matrix_transform extension included")

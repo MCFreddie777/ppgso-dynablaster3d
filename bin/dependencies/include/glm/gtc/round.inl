@@ -1,7 +1,7 @@
 /// @ref gtc_round
 /// @file glm/gtc/round.inl
 
-#include "bin/dependencies/include/glm/detail/func_integer.hpp"
+#include "../detail/func_integer.hpp"
 
 namespace glm{
 namespace detail

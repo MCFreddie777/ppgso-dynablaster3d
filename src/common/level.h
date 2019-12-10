@@ -8,7 +8,7 @@
 
 #include <vector>
 #include <bin/ppgso/lib/ppgso.h>
-#include <GLUT/glut.h>
+#include <GL/glew.h>
 
 using namespace std;
 using namespace glm;
@@ -26,7 +26,6 @@ enum ObjectType {
 };
 
 typedef struct ObjectCounter {
-    double spawnRate;
     int maxNumber;
     int number;
 };

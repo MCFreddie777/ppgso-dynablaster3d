@@ -12,16 +12,16 @@
 
 #pragma once
 
-#include "bin/dependencies/include/glm/detail/setup.hpp"
+#include "../detail/setup.hpp"
 
 #if !GLM_HAS_TEMPLATE_ALIASES && !(GLM_COMPILER & GLM_COMPILER_GCC)
 #	error "GLM_GTX_scalar_multiplication requires C++11 support or alias templates and if not support for GCC"
 #endif
 
-#include "bin/dependencies/include/glm/vec2.hpp"
-#include "bin/dependencies/include/glm/vec3.hpp"
-#include "bin/dependencies/include/glm/vec4.hpp"
-#include "bin/dependencies/include/glm/mat2x2.hpp"
+#include "../vec2.hpp"
+#include "../vec3.hpp"
+#include "../vec4.hpp"
+#include "../mat2x2.hpp"
 #include <type_traits>
 
 namespace glm

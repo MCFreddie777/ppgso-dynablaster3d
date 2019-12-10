@@ -49,7 +49,7 @@
 ///
 /// @ingroup core
 
-#include "bin/dependencies/include/glm/detail/_fixes.hpp"
+#include "detail/_fixes.hpp"
 
 #pragma once
 

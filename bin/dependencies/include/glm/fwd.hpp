@@ -3,10 +3,10 @@
 
 #pragma once
 
-#include "bin/dependencies/include/glm/detail/type_int.hpp"
-#include "bin/dependencies/include/glm/detail/type_float.hpp"
-#include "bin/dependencies/include/glm/detail/type_vec.hpp"
-#include "bin/dependencies/include/glm/detail/type_mat.hpp"
+#include "detail/type_int.hpp"
+#include "detail/type_float.hpp"
+#include "detail/type_vec.hpp"
+#include "detail/type_mat.hpp"
 
 //////////////////////
 // GLM_GTC_quaternion

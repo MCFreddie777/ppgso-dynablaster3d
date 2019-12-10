@@ -14,11 +14,11 @@
 #pragma once
 
 // Dependencies
-#include "bin/dependencies/include/glm/detail/setup.hpp"
-#include "bin/dependencies/include/glm/detail/precision.hpp"
-#include "bin/dependencies/include/glm/detail/func_common.hpp"
-#include "bin/dependencies/include/glm/detail/func_integer.hpp"
-#include "bin/dependencies/include/glm/detail/func_exponential.hpp"
+#include "../detail/setup.hpp"
+#include "../detail/precision.hpp"
+#include "../detail/func_common.hpp"
+#include "../detail/func_integer.hpp"
+#include "../detail/func_exponential.hpp"
 #include <limits>
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)

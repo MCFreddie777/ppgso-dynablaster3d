@@ -27,7 +27,7 @@
 
 #include <cassert>
 #include <cstddef>
-#include "bin/dependencies/include/glm/simd/platform.h"
+#include "../simd/platform.h"
 
 ///////////////////////////////////////////////////////////////////////////////////
 // Version

@@ -1,0 +1,6 @@
+.*
+cmake-build*
+.idea/
+*.mtl
+*.blend
+out/

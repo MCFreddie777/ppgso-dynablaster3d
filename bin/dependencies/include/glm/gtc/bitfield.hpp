@@ -14,10 +14,10 @@
 #pragma once
 
 // Dependencies
-#include "bin/dependencies/include/glm/detail/setup.hpp"
-#include "bin/dependencies/include/glm/detail/precision.hpp"
-#include "bin/dependencies/include/glm/detail/type_int.hpp"
-#include "bin/dependencies/include/glm/detail/_vectorize.hpp"
+#include "../detail/setup.hpp"
+#include "../detail/precision.hpp"
+#include "../detail/type_int.hpp"
+#include "../detail/_vectorize.hpp"
 #include <limits>
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)

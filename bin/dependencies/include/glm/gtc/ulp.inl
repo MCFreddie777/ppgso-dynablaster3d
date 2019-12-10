@@ -8,7 +8,7 @@
 /// software is freely granted, provided that this notice
 /// is preserved.
 
-#include "bin/dependencies/include/glm/detail/type_int.hpp"
+#include "../detail/type_int.hpp"
 #include <cmath>
 #include <cfloat>
 #include <limits>

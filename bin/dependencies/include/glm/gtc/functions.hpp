@@ -15,9 +15,9 @@
 #pragma once
 
 // Dependencies
-#include "bin/dependencies/include/glm/detail/setup.hpp"
-#include "bin/dependencies/include/glm/detail/precision.hpp"
-#include "bin/dependencies/include/glm/detail/type_vec2.hpp"
+#include "../detail/setup.hpp"
+#include "../detail/precision.hpp"
+#include "../detail/type_vec2.hpp"
 
 #if GLM_MESSAGES == GLM_MESSAGES_ENABLED && !defined(GLM_EXT_INCLUDED)
 #	pragma message("GLM: GLM_GTC_functions extension included")

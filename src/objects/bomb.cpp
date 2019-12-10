@@ -4,7 +4,7 @@
 
 #include <shaders/diffuse_vert_glsl.h>
 #include <shaders/diffuse_frag_glsl.h>
-#include <src/common/movement.h>
+#include "../common/movement.h"
 
 #include "bomb.h"
 #include "player.h"
@@ -24,8 +24,8 @@ Bomb::Bomb (vec3 position, Player &player) {
     this->player = &player;
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
-    if (!texture) texture = make_unique<Texture>(image::loadBMP("../resources/textures/bomb.bmp"));
-    if (!mesh) mesh = make_unique<Mesh>("../resources/objects/bomb.obj");
+    if (!texture) texture = make_unique<Texture>(image::loadBMP("textures/bomb.bmp"));
+    if (!mesh) mesh = make_unique<Mesh>("objects/bomb.obj");
 }
 
 bool Bomb::update (Scene &scene, float dt) {

@@ -7,7 +7,7 @@
 #ifndef DYNABLASTER3D_BLOCK_H
 #define DYNABLASTER3D_BLOCK_H
 
-#include "src/common/scene.h"
+#include "../common/scene.h"
 #include "object.h"
 
 class Block final : public Object {

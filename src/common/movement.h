@@ -7,8 +7,8 @@
 #ifndef DYNABLASTER3D_MOVEMENT_H
 #define DYNABLASTER3D_MOVEMENT_H
 
-#include <src/objects/object.h>
-#include <src/common/game.h>
+#include "../objects/object.h"
+#include "../common/game.h"
 
 class Move {
 public:

@@ -3,7 +3,7 @@
 
 #pragma once
 
-#include "bin/dependencies/include/glm/fwd.hpp"
+#include "../fwd.hpp"
 #include "type_vec.hpp"
 #if GLM_SWIZZLE == GLM_SWIZZLE_ENABLED
 #	if GLM_HAS_UNRESTRICTED_UNIONS

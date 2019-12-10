@@ -2,10 +2,10 @@
 // Created by František Gič on 02/12/2019.
 //
 
-#include <src/objects/block.h>
-#include <src/objects/player.h>
-#include <src/objects/enemy.h>
-#include <src/objects/bomb.h>
+#include "../objects/block.h"
+#include "../objects/player.h"
+#include "../objects/enemy.h"
+#include "../objects/bomb.h"
 #include "movement.h"
 #include "game.h"
 
