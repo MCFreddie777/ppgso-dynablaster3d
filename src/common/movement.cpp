@@ -37,7 +37,7 @@ Object *Movement::getIntersectingObject (Game &scene, vec3 position) {
             return obj.get();
         }
     }
-    return nullptr;
+    return NULL;
 }
 
 template<typename T>

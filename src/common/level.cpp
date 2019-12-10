@@ -182,11 +182,12 @@ vector<vector<char>> Level::get () {
 void Level::dropPowerUp (Game &game) {
     srand(time(NULL));
     
-    while (1) {
+    while (true) {
         // I know, its weird. I have a size of 15, but each cube is of size 2.
         // rand() % (max - min + 1) + min;
-        vec3 position{2 * (rand() % ((size) - 2) + 2), 20, 2 * (rand() % ((size) - 2) + 2)};
-        auto obj = Movement::getIntersectingObject(game, position);
+        vec3 position{2 * (rand() % ((size) - 2)), 20, 2 * (rand() % ((size) - 2))};
+        auto obj = Movement::getIntersectingObject(game, {position.x, 2, position.z});
+        
         if (!obj) {
             auto powerUp = make_unique<PowerUp>(position);
             game.objects.push_back(move(powerUp));
