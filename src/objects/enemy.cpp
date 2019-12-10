@@ -19,6 +19,7 @@ unique_ptr<Shader> Enemy::shader;
 
 Enemy::Enemy (vec3 position) {
     this->position = position;
+    this->nextKeyPos = position;
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
     if (!texture) texture = make_unique<Texture>(image::loadBMP("textures/enemy.bmp"));
@@ -26,7 +27,15 @@ Enemy::Enemy (vec3 position) {
 }
 
 bool Enemy::update (Scene &scene, float dt) {
-    ComplexPosition complexPosition = Movement::getPossibleMove(dynamic_cast<Game &>(scene), this);
+    if (hasMoved) {
+        position = lerp(position, nextKeyPos, dt * 6);
+        if (abs(nextKeyPos.z - position.z) < 0.2f && abs(nextKeyPos.x - position.x) < 0.2f) {
+            position = nextKeyPos;
+            hasMoved = false;
+        }
+    }
+    
+    if (dynamic_cast<Game &>(scene).animate) roam(scene, dt);
     
     // Check if enemy intersects with fire
     auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), this);
@@ -35,16 +44,18 @@ bool Enemy::update (Scene &scene, float dt) {
         return false;
     }
     
-    if (dynamic_cast<Game &>(scene).animate) roam(complexPosition, dt);
     generateModelMatrix();
     return true;
 }
 
-void Enemy::roam (ComplexPosition complexPosition, float dt) {
+void Enemy::roam (Scene &scene, float dt) {
     delay += dt;
     
-    if (delay > 0.3f) {
+    if (delay > 0.5f) {
         delay = 0;
+        
+        ComplexPosition complexPosition =
+            Movement::getPossibleMove(dynamic_cast<Game &>(scene), this);
         
         // generate new direction when on crossroads or corners
         if (complexPosition.inCorner || complexPosition.inCrossRoads)
@@ -66,10 +77,11 @@ void Enemy::roam (ComplexPosition complexPosition, float dt) {
             }
         }
         
+        this->hasMoved = true;
         switch (direction) {
             case 1: {
                 if (complexPosition.move.up) {
-                    position.z += 2;
+                    this->nextKeyPos = vec3{position.x, position.y, position.z + 2};
                     rotation.z = 0;
                 }
                 else {
@@ -79,7 +91,7 @@ void Enemy::roam (ComplexPosition complexPosition, float dt) {
             }
             case 2: {
                 if (complexPosition.move.down) {
-                    position.z -= 2;
+                    this->nextKeyPos = vec3{position.x, position.y, position.z - 2};
                     rotation.z = -PI;
                 }
                 else {
@@ -89,7 +101,7 @@ void Enemy::roam (ComplexPosition complexPosition, float dt) {
             }
             case 3: {
                 if (complexPosition.move.left) {
-                    position.x += 2;
+                    this->nextKeyPos = vec3{position.x + 2, position.y, position.z};
                     rotation.z = PI / 2.0f;
                 }
                 else {
@@ -99,7 +111,7 @@ void Enemy::roam (ComplexPosition complexPosition, float dt) {
             }
             case 4: {
                 if (complexPosition.move.right) {
-                    position.x -= 2;
+                    this->nextKeyPos = vec3{position.x - 2, position.y, position.z};
                     rotation.z = -PI / 2.0f;
                 }
                 else {

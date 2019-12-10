@@ -13,7 +13,7 @@
 class Enemy final : public Object {
 
 private:
-    
+    bool hasMoved = false;
     float delay = 0.0f;
     int direction = 0;
     
@@ -21,7 +21,7 @@ private:
     static std::unique_ptr<ppgso::Shader> shader;
     static std::unique_ptr<ppgso::Texture> texture;
     
-    void roam (ComplexPosition complexPosition, float dt);
+    void roam (Scene &scene, float dt);
 
 public:
     
