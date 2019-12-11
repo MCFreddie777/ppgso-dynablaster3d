@@ -68,10 +68,7 @@ void Player::render (Scene &scene) {
     
     // Set up light
     shader->setUniform("LightDirection", scene.lightDirection);
-//    shader->setUniform("LightDirection2", scene.lightDirection2);
-    
     shader->setUniform("LightColor", scene.lightColor);
-//    shader->setUniform("LightColor2", scene.lightColor2);
     
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);

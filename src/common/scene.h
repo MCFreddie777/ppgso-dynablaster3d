@@ -40,9 +40,7 @@ public:
     
     // Lights, in this case using only simple directional diffuse lighting
     glm::vec3 lightDirection{1.0f};
-    glm::vec3 lightDirection2{1.0f};
     glm::vec3 lightColor{1.0f};
-    glm::vec3 lightColor2{1.0f};
     
     
     // Store cursor state
