@@ -46,6 +46,7 @@ void Block::render (Scene &scene) {
     
     // use camera
     shader->setUniform("ProjectionMatrix", scene.camera->projectionMatrix);
+    shader->setUniform("ViewPosition", scene.camera->current.position);
     shader->setUniform("ViewMatrix", scene.camera->viewMatrix);
     
     // render mesh
