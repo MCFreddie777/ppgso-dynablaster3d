@@ -13,6 +13,8 @@
 
 using namespace ppgso;
 
+class Player;
+
 class PowerUp final : public Object {
 
 private:
@@ -22,11 +24,18 @@ private:
 
 public:
     string type;
+    string mode;
+    float angle = 0.0f;
+    float age = 0.0f;
+    Player *parent;
+    
     vec3 momentum = {0.0f, 0.0f, linearRand(-PI / 4.0f, PI / 4.0f)};
     vec3 speed = {0, -3.0f, 0};
     Shadow *shadow;
     
     PowerUp (vec3 position);
+    
+    PowerUp (string type, Scene &scene);
     
     bool update (Scene &scene, float dt) override;
     

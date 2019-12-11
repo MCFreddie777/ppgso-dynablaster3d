@@ -46,7 +46,7 @@ bool Bomb::update (Scene &scene, float dt) {
     shadow->render(scene);
     
     if (age > maxAge) {
-        explode(dynamic_cast<Game &>(scene), player->bombs.radius);
+        explode(dynamic_cast<Game &>(scene), player->bombs.get("radius"));
         return false;
     }
     
@@ -73,7 +73,7 @@ void Bomb::render (Scene &scene) {
 }
 
 void Bomb::explode (Game &scene, uint radius) {
-    this->player->bombs.number--;
+    this->player->bombs.modify("number", "decrease");
     
     // Create fire element (radius) blocks from the bomb position
     for (

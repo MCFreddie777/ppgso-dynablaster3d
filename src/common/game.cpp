@@ -3,7 +3,6 @@
 //
 
 #include <thread>
-#include <stdlib.h>
 #include <chrono>
 #include "game.h"
 #include "scenewindow.h"

@@ -16,21 +16,11 @@
 
 class Bomb;
 
-class BombInfo {
-
-public:
-    uint number = 0;
-    uint max;
-    uint radius = 1;
-    
-    BombInfo (uint maxBombs) {
-        this->max = 1;
-    }
-};
+class PowerUp;
 
 class Player final : public Object {
-
 private:
+    
     bool hasMoved = false;
     float delay = 0.0f;
     Shadow *shadow;
@@ -42,6 +32,20 @@ private:
     void handleMovement (map<int, int> keyboard, float dt, Scene &scene);
 
 public:
+    class BombInfo {
+    private:
+        uint number = 0;
+        uint max;
+        uint radius = 1;
+    
+    public:
+        
+        BombInfo (uint maxBombs);
+        
+        uint get (string type);
+        
+        void modify (string type, string action);
+    };
     
     short direction = 0;
     
@@ -52,6 +56,8 @@ public:
     bool update (Scene &scene, float dt) override;
     
     void render (Scene &scene) override;
+    
+    void addPowerUp (string type, Scene &scene);
 };
 
 #endif //DYNABLASTER3D_PLAYER_H
