@@ -13,12 +13,12 @@ Object *Movement::getIntersectingObject (Game &scene, Object *object) {
     for (auto &obj : scene.objects) {
         
         // Ignore self in scene
-        if (obj.get() == object)
+        if (obj.get() == object || dynamic_cast<Shadow *>(obj.get()))
             continue;
         
         if (
-            distance(object->position.z, obj->position.z) == 0 &&
-            distance(object->position.x, obj->position.x) == 0 &&
+            distance(object->position.z, obj->position.z) < obj->scale.z &&
+            distance(object->position.x, obj->position.x) < obj->scale.x &&
             object->position.y == obj->position.y
             ) {
             return obj.get();
@@ -26,6 +26,7 @@ Object *Movement::getIntersectingObject (Game &scene, Object *object) {
     }
 }
 
+// Method for checking objects at given coordinates
 Object *Movement::getIntersectingObject (Game &scene, vec3 position) {
     for (auto &obj : scene.objects) {
         

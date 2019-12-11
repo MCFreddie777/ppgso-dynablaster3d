@@ -49,6 +49,7 @@ bool Player::update (Scene &scene, float dt) {
     shadow->update(scene, dt);
     shadow->render(scene);
     
+    
     // Check if player intersects with enemy or fire
     auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), this);
     
@@ -61,6 +62,7 @@ bool Player::update (Scene &scene, float dt) {
     }
     
     handleMovement(scene.keyboard, dt, scene);
+    
     generateModelMatrix();
     return true;
 }
