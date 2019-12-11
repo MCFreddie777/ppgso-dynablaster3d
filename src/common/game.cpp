@@ -67,11 +67,23 @@ void Game::handleKey (int key, int action) {
                 this->camera->switchView(this);
                 break;
             }
-    
-            case (GLFW_KEY_I): {
+        
+                // Toggle weather - raining
+            case (GLFW_KEY_U): {
                 this->weather->toggleRain();
                 break;
             }
+                // Set wind direction
+            case (GLFW_KEY_I): {
+                this->weather->wind -= .026f;
+                break;
+            }
+                // Set wind direction
+            case (GLFW_KEY_O): {
+                this->weather->wind += .026f;
+                break;
+            }
+            
             default:
                 break;
         }

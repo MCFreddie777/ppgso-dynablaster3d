@@ -42,6 +42,8 @@ private:
     };
 
 public:
+    float wind = 0.0f;
+    
     explicit Weather (Scene *scene);
     
     void update ();

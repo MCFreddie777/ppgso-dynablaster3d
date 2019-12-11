@@ -24,10 +24,10 @@ Weather::RainParticle::RainParticle (vec3 position, Weather *parent) {
 }
 
 bool Weather::RainParticle::update (Scene &scene, float dt) {
-    if (position.y <= 1 || !parent->raining)
+    if (position.y <= 1)
         return false;
     else if (position.y > 1) {
-        position += (speed * dt);
+        position += vec3{(speed.x * dt) + parent->wind, speed.y * dt, speed.z * dt};
         speed += speed * dt;
     }
     
