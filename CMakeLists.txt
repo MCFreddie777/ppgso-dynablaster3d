@@ -82,6 +82,7 @@ add_executable(DynaBlaster3D
         src/common/camera.cpp
         src/common/level.cpp
         src/common/shadow.cpp
+        src/common/weather.cpp
         src/objects/object.cpp
         src/objects/block.cpp
         src/objects/player.cpp

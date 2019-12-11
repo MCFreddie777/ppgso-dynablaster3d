@@ -15,7 +15,7 @@ using namespace std;
 Level::Level (uint size) {
     this->size = size;
     
-    this->objects =  {
+    this->objects = {
         {
             (int) round(size / 3),
             0,
@@ -29,7 +29,6 @@ Level::Level (uint size) {
             0,
         },
     };
-    
     this->generate();
 }
 

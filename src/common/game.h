@@ -8,6 +8,8 @@
 
 #include "scene.h"
 
+class Weather;
+
 class Player;
 
 class Game final : public Scene {
@@ -18,6 +20,7 @@ private:
 public:
     bool animate = true;
     
+    unique_ptr<Weather> weather;
     unique_ptr<Level> level;
     Player *player;
     

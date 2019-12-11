@@ -7,6 +7,7 @@
 #include "../common/camera.h"
 #include "../common/game.h"
 #include "../common/menu.h"
+#include "../common/weather.h"
 
 const unsigned int SIZE = 1024;
 
@@ -51,8 +52,10 @@ void SceneWindow::onIdle () {
     float dt = 0;
 
 // Compute time delta
-    if (dynamic_cast<Game *>(this->scene))
+    if (dynamic_cast<Game *>(this->scene)) {
         dt = dynamic_cast<Game *>(this->scene)->animate ? (float) glfwGetTime() - time : 0;
+        dynamic_cast<Game *>(this->scene)->weather->update();
+    }
     
     time = (float) glfwGetTime();
     
@@ -61,8 +64,8 @@ void SceneWindow::onIdle () {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     scene->update(dt);
+    scene->camera->update();
     scene->render();
-    
 }
 
 void SceneWindow::openMenu () {

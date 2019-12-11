@@ -7,6 +7,7 @@
 #include <chrono>
 #include "game.h"
 #include "scenewindow.h"
+#include "weather.h"
 
 void Game::init () {
     
@@ -17,6 +18,9 @@ void Game::init () {
     auto level = make_unique<Level>(this->size);
     this->level = move(level);
     this->level->create(*this);
+    
+    auto weather = make_unique<Weather>(this);
+    this->weather = move(weather);
 }
 
 void Game::update (float time) {
@@ -63,6 +67,11 @@ void Game::handleKey (int key, int action) {
                 this->camera->switchView(this);
                 break;
             }
+    
+            case (GLFW_KEY_I): {
+                this->weather->toggleRain();
+                break;
+            }
             default:
                 break;
         }
@@ -77,8 +86,8 @@ void Game::handleKey (int key, int action) {
     }
     
     // Handle camera
-    if (std::find(std::begin(this->camera->controls), std::end(this->camera->controls), key) != std::end(this->camera->controls))
-  {
+    if (std::find(std::begin(this->camera->controls), std::end(this->camera->controls), key)
+        != std::end(this->camera->controls)) {
         this->camera->handleKey(key);
     }
 }
