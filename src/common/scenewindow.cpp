@@ -4,7 +4,6 @@
 
 #include "scenewindow.h"
 
-#include "../common/camera.h"
 #include "../common/game.h"
 #include "../common/menu.h"
 #include "../common/weather.h"
@@ -64,7 +63,6 @@ void SceneWindow::onIdle () {
     glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
     
     scene->update(dt);
-    scene->camera->update();
     scene->render();
 }
 

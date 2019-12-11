@@ -37,6 +37,8 @@ bool Player::update (Scene &scene, float dt) {
     // Keyframes and linear interpolation when moving
     if (hasMoved) {
         position = lerp(position, nextKeyPos, dt * 6);
+        if (scene.camera->isFirstPersonMode())
+            scene.camera->updateWithDirection(position, direction);
         if (abs(nextKeyPos.z - position.z) < 0.1f && abs(nextKeyPos.x - position.x) < 0.1f) {
             position = nextKeyPos;
             hasMoved = false;
@@ -81,10 +83,12 @@ void Player::render (Scene &scene) {
     mesh->render();
 }
 
+/*
+ * This method is ready for refactor because it's ugly as shit but I don't have enough time to do
+ * that.
+ */
 void Player::handleMovement (map<int, int> keyboard, float dt, Scene &scene) {
-    // key event throttling
     delay += dt;
-    
     if (
         (
             (
@@ -125,7 +129,6 @@ void Player::handleMovement (map<int, int> keyboard, float dt, Scene &scene) {
         }
         else if (scene.camera->isFirstPersonMode()) {
             this->hasMoved = true;
-            
             if (keyboard[GLFW_KEY_W] && Movement::canMove(complexPosition)) {
                 switch (direction) {
                     case 0: {
@@ -151,7 +154,10 @@ void Player::handleMovement (map<int, int> keyboard, float dt, Scene &scene) {
                 }
             }
             // THrottling rotation events
-            if (delay > 0.25f) {
+            if (delay > 0.25f && (
+                keyboard[GLFW_KEY_W] || keyboard[GLFW_KEY_A] ||
+                keyboard[GLFW_KEY_S] || keyboard[GLFW_KEY_D]
+            )) {
                 delay = 0;
                 if (keyboard[GLFW_KEY_S]) {
                     rotation.z += PI;
@@ -172,23 +178,20 @@ void Player::handleMovement (map<int, int> keyboard, float dt, Scene &scene) {
                     else direction = 0;
                 }
             }
-            scene.camera->updateWithDirection(position, direction);
         }
-    
         if (keyboard[GLFW_KEY_SPACE] && delay > 0.25f) {
             delay = 0;
             if (this->bombs.get("number") < this->bombs.get("max")) {
                 this->bombs.modify("number", "increase");
-            
-                auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), position);
-                if (!obj || dynamic_cast<Player *>(obj)) {
+                auto obj =
+                    Movement::getIntersectingObject(dynamic_cast<Game &>(scene), position);
+                if (!obj || dynamic_cast<Player *>(obj) || dynamic_cast<Shadow *>(obj)) {
                     auto bomb = make_unique<Bomb>(position, *this);
                     scene.objects.push_back(move(bomb));
                 }
             }
         }
     }
-    
 }
 
 void Player::addPowerUp (string type, Scene &scene) {
@@ -197,7 +200,10 @@ void Player::addPowerUp (string type, Scene &scene) {
 }
 
 
-Player::BombInfo::BombInfo (uint maxBombs) {
+Player::BombInfo::BombInfo (
+    uint
+    maxBombs
+) {
     this->max = 1;
 };
 

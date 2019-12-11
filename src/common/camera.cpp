@@ -34,7 +34,9 @@ void Camera::update (vec3 center) {
 }
 
 void Camera::updateWithDirection (vec3 position, short direction) {
-    this->update(position - this->getDirectionMatrix(direction), position);
+    current.position = position - this->getDirectionMatrix(direction);
+    current.center = position;
+    this->update();
 }
 
 vec3 Camera::getDirectionMatrix (short direction) {
