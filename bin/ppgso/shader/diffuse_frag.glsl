@@ -11,6 +11,8 @@ uniform float Transparency;
 // (optional) Texture offset
 uniform vec2 TextureOffset;
 
+uniform vec3 Diffuse;
+
 // The vertex shader will feed this input
 in vec2 texCoord;
 
@@ -21,6 +23,7 @@ in vec4 normal;
 out vec4 FragmentColor;
 
 void main() {
+
   // Compute diffuse lighting
   float diffuse = max(dot(normal, vec4(normalize(LightDirection), 1.0f)), 0.0f);
 
