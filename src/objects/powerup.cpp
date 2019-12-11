@@ -22,6 +22,8 @@ PowerUp::PowerUp (vec3 position) {
     this->type = ((rand() % 2)) ? "bomb" : "fire";
     
     this->position = position;
+    this->shadow = new Shadow(position, {scale.x - 1, 0.0f, scale.z - 1});
+    
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
     if (!texture)
         texture = make_unique<Texture>(
@@ -36,12 +38,18 @@ bool PowerUp::update (Scene &scene, float dt) {
     if (position.y > 2) {
         position += (speed * dt);
         speed += speed * dt;
+        shadow->scale += vec3{0.5 * dt, 0, 0.5 * dt};
     }
     else {
         if (position.y != 2) position.y = 2;
+        shadow->update(position, scale, scene);
         speed = vec3{0, 0, 0};
     }
     rotation += momentum * dt;
+    
+    shadow->update(this->position, scene);
+    shadow->update(scene, dt);
+    shadow->render(scene);
     
     auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), this);
     
@@ -55,7 +63,7 @@ bool PowerUp::update (Scene &scene, float dt) {
         }
         return false;
     }
-    // If powerup is being hit with fire
+    // If powerup is being hit with fire, it burns down
     if (dynamic_cast<Fire *>(obj)) return false;
     
     generateModelMatrix();

@@ -8,6 +8,7 @@
 
 #include "../common/scene.h"
 #include "../common/movement.h"
+#include "../common/shadow.h"
 #include "object.h"
 
 class Enemy final : public Object {
@@ -16,6 +17,7 @@ private:
     bool hasMoved = false;
     float delay = 0.0f;
     int direction = 0;
+    Shadow *shadow;
     
     static std::unique_ptr<ppgso::Mesh> mesh;
     static std::unique_ptr<ppgso::Shader> shader;

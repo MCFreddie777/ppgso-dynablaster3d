@@ -7,7 +7,7 @@
 #include "../objects/enemy.h"
 #include "../objects/bomb.h"
 #include "movement.h"
-#include "game.h"
+#include "shadow.h"
 
 Object *Movement::getIntersectingObject (Game &scene, Object *object) {
     for (auto &obj : scene.objects) {
@@ -56,9 +56,9 @@ ComplexPosition Movement::getPossibleMove (Game &scene, T *object) {
     };
     
     for (auto &obj : scene.objects) {
-        
-        // Ignore self in scene
-        if (obj.get() == object)
+    
+        // Ignore self and shadow in scene
+        if (obj.get() == object || dynamic_cast<Shadow *>(obj.get()))
             continue;
         
         

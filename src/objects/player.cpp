@@ -23,6 +23,7 @@ unique_ptr<Shader> Player::shader;
 Player::Player (vec3 position) {
     this->position = position;
     this->nextKeyPos = position;
+    this->shadow = new Shadow(position, this->scale);
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
     if (!texture)
@@ -32,6 +33,7 @@ Player::Player (vec3 position) {
 
 bool Player::update (Scene &scene, float dt) {
     
+    // Keyframes and linear interpolation when moving
     if (hasMoved) {
         position = lerp(position, nextKeyPos, dt * 6);
         if (abs(nextKeyPos.z - position.z) < 0.1f && abs(nextKeyPos.x - position.x) < 0.1f) {
@@ -39,6 +41,10 @@ bool Player::update (Scene &scene, float dt) {
             hasMoved = false;
         }
     }
+    
+    shadow->update(this->position, scene);
+    shadow->update(scene, dt);
+    shadow->render(scene);
     
     // Check if player intersects with enemy or fire
     auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), this);
@@ -172,7 +178,7 @@ void Player::handleMovement (map<int, int> keyboard, float dt, Scene &scene) {
     }
     
     if (keyboard[GLFW_KEY_SPACE]) {
-        if (this->bombs.number != this->bombs.max) {
+        if (this->bombs.number <= this->bombs.max) {
             auto obj = Movement::getIntersectingObject(dynamic_cast<Game &>(scene), position);
             if (!obj || dynamic_cast<Player *>(obj)) {
                 auto bomb = make_unique<Bomb>(position, *this);

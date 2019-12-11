@@ -20,6 +20,7 @@ unique_ptr<Shader> Enemy::shader;
 Enemy::Enemy (vec3 position) {
     this->position = position;
     this->nextKeyPos = position;
+    this->shadow = new Shadow(position, this->scale);
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
     if (!texture) texture = make_unique<Texture>(image::loadBMP("textures/enemy.bmp"));
@@ -34,6 +35,10 @@ bool Enemy::update (Scene &scene, float dt) {
             hasMoved = false;
         }
     }
+    
+    shadow->update(this->position, scene);
+    shadow->update(scene, dt);
+    shadow->render(scene);
     
     if (dynamic_cast<Game &>(scene).animate) roam(scene, dt);
     

@@ -22,6 +22,7 @@ unique_ptr<Shader> Bomb::shader;
 Bomb::Bomb (vec3 position, Player &player) {
     this->position = position;
     this->player = &player;
+    this->shadow = new Shadow(position, this->scale);
     
     if (!shader) shader = make_unique<Shader>(diffuse_vert_glsl, diffuse_frag_glsl);
     if (!texture) texture = make_unique<Texture>(image::loadBMP("textures/bomb.bmp"));
@@ -31,15 +32,18 @@ Bomb::Bomb (vec3 position, Player &player) {
 bool Bomb::update (Scene &scene, float dt) {
     age += dt;
     
-    // TODO: refactor
-    if (currScale == 0.0f) currScale = dt;
-    
+    // Pulsing bomb
+    if (currScale == 0.0f)
+        currScale = dt;
     if (this->scale.y > 1.5f)
         currScale = -dt * age;
     if (this->scale.y < 1.0f)
         currScale = dt * age;
-    
     this->scale += currScale;
+    
+    shadow->update(this->position, this->scale, scene);
+    shadow->update(scene, dt);
+    shadow->render(scene);
     
     if (age > maxAge) {
         explode(dynamic_cast<Game &>(scene), player->bombs.radius);

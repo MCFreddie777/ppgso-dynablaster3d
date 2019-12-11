@@ -10,6 +10,7 @@
 #include <shaders/diffuse_frag_glsl.h>
 
 #include "../common/movement.h"
+#include "../common/shadow.h"
 #include "object.h"
 #include "block.h"
 
@@ -32,6 +33,7 @@ class Player final : public Object {
 private:
     bool hasMoved = false;
     float delay = 0.0f;
+    Shadow *shadow;
     
     static std::unique_ptr<ppgso::Mesh> mesh;
     static std::unique_ptr<ppgso::Shader> shader;

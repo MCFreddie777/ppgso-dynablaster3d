@@ -8,6 +8,7 @@
 #define DYNABLASTER3D_POWERUP_H
 
 #include "../common/scene.h"
+#include "../common/shadow.h"
 #include "object.h"
 
 using namespace ppgso;
@@ -23,6 +24,7 @@ public:
     string type;
     vec3 momentum = {0.0f, 0.0f, linearRand(-PI / 4.0f, PI / 4.0f)};
     vec3 speed = {0, -3.0f, 0};
+    Shadow *shadow;
     
     PowerUp (vec3 position);
     

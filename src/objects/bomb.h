@@ -7,6 +7,7 @@
 #define DYNABLASTER3D_BOMB_H
 
 #include "../common/game.h"
+#include "../common/shadow.h"
 #include "object.h"
 
 class Player;
@@ -18,6 +19,7 @@ private:
     float maxAge{3.5f};
     float currScale{0.0f};
     Player *player;
+    Shadow *shadow;
     
     static std::unique_ptr<ppgso::Mesh> mesh;
     static std::unique_ptr<ppgso::Shader> shader;
